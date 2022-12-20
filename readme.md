@@ -1,4 +1,4 @@
-![](https://cdn.myuuiii.com/projects/dawpresence/DAWRichPresence_v2.png)
+![](https://cdn.myuuiii.com/projects/dawpresence/DAWRichPresence_v3.png)
 
 A Discord Rich Presence app for several DAWs like FL Studio and Ableton.
 
