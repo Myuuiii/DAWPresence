@@ -12,6 +12,7 @@ internal sealed class Worker : BackgroundService
 	private readonly ILogger<Worker> _logger;
 	private readonly AppConfiguration _configuration;
 	private DiscordRpcClient? client;
+	private DateTime? startTime;
 
 	public Worker(ILogger<Worker> logger)
 	{
@@ -38,7 +39,7 @@ internal sealed class Worker : BackgroundService
 			.Where(t => t.IsSubclassOf(typeof(Daw)))
 			.Select(t => (Daw?)Activator.CreateInstance(t));
 		IEnumerable<Daw?> regDawArray = registeredDaws as Daw[] ?? registeredDaws.ToArray();
-		
+
 		foreach (Daw? r in regDawArray)
 			Console.WriteLine($"{r.DisplayName} has been registered");
 
@@ -50,10 +51,13 @@ internal sealed class Worker : BackgroundService
 			{
 				client?.ClearPresence();
 				client?.Dispose();
+				startTime = null;
 				Console.WriteLine("No DAW is running");
 				return;
 			}
 
+			startTime ??= DateTime.UtcNow;
+			
 			Console.WriteLine("Detected: " + daw.DisplayName);
 			Console.WriteLine("Project: " + daw.GetProjectNameFromProcessWindow());
 
@@ -80,7 +84,7 @@ internal sealed class Worker : BackgroundService
 				},
 				Timestamps = new Timestamps
 				{
-					Start = DateTime.UtcNow.Add(-_configuration.Offset)
+					Start = startTime?.Add(-_configuration.Offset)
 				}
 			});
 
