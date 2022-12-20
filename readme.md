@@ -2,7 +2,7 @@
 
 A Discord Rich Presence app for several DAWs like FL Studio and Ableton.
 
-> The software is not finished yet and most DAWs don't have application ids yet so will not work. I expect to have added these by the 23rd of December 2022.
+> The software is not finished yet and DAWs except for Ableton Live and FL Studio don't have application ids yet so will not work. I expect to have added these by the 23rd of December 2022.
 
 | ![](https://ss.myuuiii.com/Glf1gL6PvE.png) | ![](https://ss.myuuiii.com/Discord_edjjth5Bp5.png) |
 | :----------------------------------------: | :------------------------------------------------: |
