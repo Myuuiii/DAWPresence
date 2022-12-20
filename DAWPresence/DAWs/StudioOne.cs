@@ -2,7 +2,7 @@
 
 namespace DAWPresence.DAWs;
 
-public class StudioOne : DAW
+public class StudioOne : Daw
 {
 	public StudioOne()
 	{
@@ -11,7 +11,6 @@ public class StudioOne : DAW
 		ImageKey = "icon";
 		ApplicationId = "";
 		WindowTrim = " - " + DisplayName;
-		;
 		TitleOffset = 13;
 	}
 
@@ -20,6 +19,8 @@ public class StudioOne : DAW
 		Process? process = GetProcess();
 		if (process is null) return "";
 		string title = process.MainWindowTitle;
-		return title.Contains(WindowTrim) ? title[..^TitleOffset] : "";
+		return title.Contains(WindowTrim)
+			? title[..^TitleOffset]
+			: "";
 	}
 }

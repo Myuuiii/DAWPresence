@@ -2,7 +2,7 @@
 
 namespace DAWPresence.DAWs;
 
-public class FLStudio : DAW
+public class FLStudio : Daw
 {
 	public FLStudio()
 	{
@@ -19,6 +19,8 @@ public class FLStudio : DAW
 		Process? process = GetProcess();
 		if (process is null) return "";
 		string title = process.MainWindowTitle;
-		return title.Contains(WindowTrim) ? title[..^TitleOffset] : "";
+		return title.Contains(WindowTrim)
+			? title[..^TitleOffset]
+			: "";
 	}
 }

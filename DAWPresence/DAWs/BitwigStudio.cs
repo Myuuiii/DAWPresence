@@ -2,7 +2,7 @@
 
 namespace DAWPresence.DAWs;
 
-public class BitwigStudio : DAW
+public class BitwigStudio : Daw
 {
 	public BitwigStudio()
 	{
@@ -19,6 +19,8 @@ public class BitwigStudio : DAW
 		Process? process = GetProcess();
 		if (process is null) return "";
 		string title = process.MainWindowTitle;
-		return title.Contains(WindowTrim) ? title[..^TitleOffset] : "";
+		return title.Contains(WindowTrim)
+			? title[..^TitleOffset]
+			: "";
 	}
 }

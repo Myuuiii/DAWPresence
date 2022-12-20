@@ -2,14 +2,14 @@
 
 namespace DAWPresence.DAWs;
 
-public class AbletonLive10Intro : DAW
+public class AbletonLive10Intro : Daw
 {
 	public AbletonLive10Intro()
 	{
 		ProcessName = "Ableton Live 10 Intro";
-		DisplayName = "Ableton Live 10 Intro";
-		ImageKey = "icon";
-		ApplicationId = "";
+		DisplayName = ProcessName;
+		ImageKey = "ableton-white";
+		ApplicationId = "1053952444859686983";
 		WindowTrim = " - " + DisplayName;
 		TitleOffset = 24;
 	}
@@ -19,6 +19,8 @@ public class AbletonLive10Intro : DAW
 		Process? process = GetProcess();
 		if (process is null) return "";
 		string title = process.MainWindowTitle;
-		return title.Contains(WindowTrim) ? title[..^TitleOffset] : "";
+		return title.Contains(WindowTrim)
+			? title[..^TitleOffset]
+			: "";
 	}
 }

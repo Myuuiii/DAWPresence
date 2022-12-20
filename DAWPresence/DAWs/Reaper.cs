@@ -2,7 +2,7 @@
 
 namespace DAWPresence.DAWs;
 
-public class Reaper : DAW
+public class Reaper : Daw
 {
 	public Reaper()
 	{
@@ -19,6 +19,8 @@ public class Reaper : DAW
 		Process? process = GetProcess();
 		if (process is null) return "";
 		string title = process.MainWindowTitle;
-		return title.Contains(WindowTrim) ? title[..^title.IndexOf(WindowTrim, StringComparison.Ordinal)] : "";
+		return title.Contains(WindowTrim)
+			? title[..^title.IndexOf(WindowTrim, StringComparison.Ordinal)]
+			: "";
 	}
 }
