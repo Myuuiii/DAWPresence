@@ -8,8 +8,6 @@ A Discord Rich Presence app for several DAWs like FL Studio and Ableton.
 | :----------------------------------------: | :------------------------------------------------: |
 
 
-
-
 ## How to use
 
 - Download the latest release from the [releases](https://github.com/Myuuiii/DAWPresence/releases/) tab.
@@ -21,6 +19,13 @@ A Discord Rich Presence app for several DAWs like FL Studio and Ableton.
 
 I will work out this section later ♥
 
+## Roadmap
+
+If there's something you'd like to have implemented you can either send `Myuuiii#0001` a message on Discord or create an issue here on GitHub with the label "enhancement"
+
+- [ ] Add custom images for each distribution of Ableton Live
+- [ ] Discord's implementation of "time elapsed" only allows for 24 hours before wrapping back around to "00:00:00". Make it so it can also track longer periods of time
+
 ## Contributing
 
 ### Adding a new DAW
@@ -29,7 +34,7 @@ If there is a DAW that is currently not implemented you can easily add it yourse
 
 ## Custom Image Key
 
-Some people might want a custom image on the rich presence. To bump the project a bit, I am making this exclusive to people that have starred this repository. For those that have, please contact @Myuuiii#0001 on Discord for more information. An example is shown below
+Some people might want a custom image on the rich presence. To bump the project a bit, I am making this exclusive to people that have starred this repository. For those that have, please contact `Myuuiii#0001` on Discord for more information. An example is shown below
 
 ![](https://ss.myuuiii.com/Discord_pe6dCw5B1o.png)
 
