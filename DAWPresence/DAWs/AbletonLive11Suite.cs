@@ -11,7 +11,7 @@ public class AbletonLive11Suite : Daw
 		ImageKey = "ableton-white";
 		ApplicationId = "1053952444859686983";
 		WindowTrim = " - " + DisplayName;
-		TitleOffset = 16;
+		TitleOffset = 24;
 	}
 
 	public override string GetProjectNameFromProcessWindow()
