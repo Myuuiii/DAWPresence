@@ -1,14 +1,15 @@
 ﻿using System.Diagnostics;
+using System.Text.RegularExpressions;
 
 namespace DAWPresence.DAWs;
 
-public class AbletonLive11Suite : Daw
+public partial class AbletonLive11Suite : Daw
 {
 	public AbletonLive11Suite()
 	{
 		ProcessName = "Ableton Live 11 Suite";
 		DisplayName = ProcessName;
-		ImageKey = "ableton-white";
+		ImageKey = "ableton";
 		ApplicationId = "1053952444859686983";
 		WindowTrim = " - " + DisplayName;
 		TitleOffset = 24;
@@ -20,7 +21,10 @@ public class AbletonLive11Suite : Daw
 		if (process is null) return "";
 		string title = process.MainWindowTitle;
 		return title.Contains(WindowTrim)
-			? title[..^TitleOffset]
+			? TitleRegex().Match(title[..^TitleOffset]).Value
 			: "";
 	}
+
+    [GeneratedRegex("[^\\[]*")]
+    private static partial Regex TitleRegex();
 }
