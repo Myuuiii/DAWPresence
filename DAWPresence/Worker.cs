@@ -8,7 +8,7 @@ internal sealed class Worker : BackgroundService
 {
 	private const string CONFIG_FILE_NAME = "config.yml";
 
-	private const string CREDIT = "DAWPresence by @Myuuiii#0001";
+	private const string CREDIT = "DEVELOPMENT RELEASE ||| DAWPresence by @Myuuiii#0001";
 	private readonly ILogger<Worker> _logger;
 	private readonly AppConfiguration _configuration;
 	private DiscordRpcClient? client;
