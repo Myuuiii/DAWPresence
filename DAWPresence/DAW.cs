@@ -55,5 +55,5 @@ public abstract class Daw
 	///     Get the first process with the name of the DAW
 	/// </summary>
 	/// <returns></returns>
-	protected Process GetProcess() => Process.GetProcessesByName(ProcessName).First();
+	protected virtual Process GetProcess() => Process.GetProcessesByName(ProcessName).First();
 }

@@ -1,5 +1,5 @@
 using System.Diagnostics;
-using System.Text.RegularExpressions;
+using static System.Diagnostics.Process;
 
 namespace DAWPresence.DAWs;
 
@@ -7,7 +7,7 @@ public partial class SteinbergNuendo : Daw
 {
 	public SteinbergNuendo()
 	{
-		ProcessName = "Nuendo 12";
+		ProcessName = "Nuendo ";
 		DisplayName = "Nuendo";
 		ImageKey = "nuendo";
 		ApplicationId = "1072197265587974144";
@@ -24,4 +24,6 @@ public partial class SteinbergNuendo : Daw
 			? title[TitleOffset..]
 			: "";
 	}
+
+	protected override Process GetProcess() => GetProcesses().First(x => x.ProcessName.StartsWith(ProcessName));
 }
