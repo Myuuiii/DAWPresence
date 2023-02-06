@@ -7,12 +7,12 @@ public partial class SteinbergNuendo : Daw
 {
 	public SteinbergNuendo()
 	{
-		ProcessName = "Nuendo";
-		DisplayName = ProcessName;
+		ProcessName = "Nuendo 12";
+		DisplayName = "Nuendo";
 		ImageKey = "nuendo";
-		ApplicationId = "";
-		WindowTrim = " - " + DisplayName;
-		TitleOffset = 0;
+		ApplicationId = "1072197265587974144";
+		WindowTrim = "Nuendo Project";
+		TitleOffset = 17;
 	}
 
 	public override string GetProjectNameFromProcessWindow()
@@ -21,10 +21,7 @@ public partial class SteinbergNuendo : Daw
 		if (process is null) return "";
 		string title = process.MainWindowTitle;
 		return title.Contains(WindowTrim)
-			? TitleRegex().Match(title[..^TitleOffset]).Value
+			? title[TitleOffset..]
 			: "";
 	}
-
-	[GeneratedRegex("[^\\[]*")]
-	private static partial Regex TitleRegex();
 }
