@@ -7,7 +7,7 @@ public partial class SteinbergNuendo : Daw
 {
 	public SteinbergNuendo()
 	{
-		ProcessName = "Nuendo ";
+		ProcessName = "Nuendo";
 		DisplayName = "Nuendo";
 		ImageKey = "nuendo";
 		ApplicationId = "1072197265587974144";
