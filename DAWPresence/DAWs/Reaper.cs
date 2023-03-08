@@ -8,8 +8,8 @@ public class Reaper : Daw
 	{
 		ProcessName = "reaper";
 		DisplayName = "Reaper";
-		ImageKey = "icon";
-		ApplicationId = "";
+		ImageKey = "reaper";
+		ApplicationId = "1082950869856821308";
 		WindowTrim = " - REAPER v";
 		TitleOffset = 0;
 	}
