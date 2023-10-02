@@ -7,7 +7,7 @@ public class Reaper : Daw
 	public Reaper()
 	{
 		ProcessName = "reaper";
-		DisplayName = "Reaper";
+		DisplayName = "REAPER";
 		ImageKey = "reaper";
 		ApplicationId = "1082950869856821308";
 		WindowTrim = " - REAPER v";
