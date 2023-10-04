@@ -26,6 +26,20 @@ namespace DAWPresence.TrayApp
         public DawPresenceApplicationContext()
         {
             // Initialize Tray Icon
+            try
+            {
+                if (new UpdateChecker().IsUpdateAvailable().Result)
+                {
+                    MessageBox.Show("An update is available. Please download the latest version from GitHub",
+                        "DAWPresence", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+            }
+            catch
+            {
+                MessageBox.Show("An error occurred while checking for updates.",
+                    "DAWPresence", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
             string executingPath = System.Reflection.Assembly.GetExecutingAssembly().Location;
             _trayIcon = new NotifyIcon()
             {
@@ -35,6 +49,8 @@ namespace DAWPresence.TrayApp
 
             _trayIcon.DoubleClick += TrayIcon_DoubleClick;
             InitializeDiscordRpc();
+            
+            
             MessageBox.Show("DAWPresence started. Double click the tray icon to exit.", "DAWPresence", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
