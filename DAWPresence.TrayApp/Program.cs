@@ -87,7 +87,6 @@ namespace DAWPresence.TrayApp
 
             while (!cancellationToken.IsCancellationRequested)
             {
-                Console.WriteLine("Updating presence...");
                 Daw? currentDaw = regDawArray.FirstOrDefault(d => d.IsRunning);
 
                 if (currentDaw != previousDaw)
