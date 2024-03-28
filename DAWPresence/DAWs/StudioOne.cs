@@ -8,8 +8,8 @@ public class StudioOne : Daw
 	{
 		ProcessName = "Studio One";
 		DisplayName = "Studio One";
-		ImageKey = "icon";
-		ApplicationId = "";
+		ImageKey = "studio-one";
+		ApplicationId = "1222887221577781278";
 		WindowTrim = " - " + DisplayName;
 		TitleOffset = 13;
 	}
