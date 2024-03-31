@@ -15,9 +15,9 @@ internal sealed class Worker : BackgroundService
     private DiscordRpcClient? client;
     private DateTime? startTime;
 
-    private const string RELEASE_VERSION = "debug-0.1.4";
+    private const string RELEASE_VERSION = "beta-0.1.5";
 
-    public Worker(ILogger<Worker> logger)
+    public Worker()
     {
         VersionCheck();
 
