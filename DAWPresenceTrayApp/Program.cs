@@ -1,7 +1,10 @@
+using System.Net;
+
 namespace DAWPresenceTrayApp;
 
 static class Program
 {
+    private const string VERSION = "beta-0.1.5";
     /// <summary>
     ///  The main entry point for the application.
     /// </summary>
@@ -9,6 +12,21 @@ static class Program
     static void Main()
     {
         ApplicationConfiguration.Initialize();
+        
+        string? latestVersion = null;
+        try
+        {
+            latestVersion = new WebClient().DownloadString("https://minio.myuuiii.com/mversion/dawpresence.txt");
+            Console.WriteLine($"Latest version: {latestVersion}");
+            if (latestVersion != VERSION)
+            {
+                MessageBox.Show($"A new version of DAW Presence is available: {latestVersion}. Please download it from the official GitHub page https://github.com/Myuuiii/DAWPresence", "DAW Presence", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+        catch (WebException e)
+        {
+            MessageBox.Show($"An error occurred while checking for updates: {e.Message}", "DAW Presence", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
         
         // Add tray icon
         NotifyIcon trayIcon = new NotifyIcon();
