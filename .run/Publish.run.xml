@@ -1,0 +1,6 @@
+﻿<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Publish" type="DotNetFolderPublish" factoryName="Publish to folder">
+    <riderPublish configuration="Release" platform="Any CPU" produce_single_file="true" runtime="win-x64" self_contained="true" target_folder="D:/DAWP-PUBLISH" target_framework="net8.0-windows" uuid_high="-6518831478130717984" uuid_low="-7892830845003068016" />
+    <method v="2" />
+  </configuration>
+</component>
