@@ -18,7 +18,7 @@ public class ProcessCode
     
     // config in the appdata folder
     private const string CONFIG_FILE_NAME = "./config.yml";
-    private const string CREDIT = "DAWPresence by @Myuuiii#0001";
+    private const string CREDIT = "DAWPresence by @myuuiii";
     private static AppConfiguration _configuration;
     private static DiscordRpcClient? client;
     private static DateTime? startTime;
@@ -87,6 +87,13 @@ public class ProcessCode
 
         while (true)
         {
+            if (_configuration.Debug)
+            {
+                _configuration =
+                    new Deserializer().Deserialize<AppConfiguration>(
+                        File.ReadAllText(CONFIG_FILE_NAME)); 
+            }
+           
             Daw? daw = regDawArray.FirstOrDefault(d => d.IsRunning);
             if (daw is null)
             {

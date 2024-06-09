@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Net;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
@@ -20,6 +21,18 @@ static class Program
     static void Main()
     {
         ApplicationConfiguration.Initialize();
+        
+        // If the program is started again, shut down all instances and exit
+        if (Process.GetProcessesByName("DAWPresenceTrayApp").Length > 1)
+        {
+            MessageBox.Show("DAW Presence will now shut down", "DAW Presence", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            foreach (var process in Process.GetProcessesByName("DAWPresenceTrayApp"))
+            {
+                process.Kill();
+            }
+            return;
+        }
+        
 
         string? latestVersion = null;
         try
@@ -36,7 +49,7 @@ static class Program
             MessageBox.Show($"An error occurred while checking for updates: {e.Message}", "DAW Presence", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
         
-        MessageBox.Show("DAW Presence is now running in the background. Currently there is no tray icon, the software will run in the background. It can be closed through Task Manager", "DAW Presence", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        MessageBox.Show("DAW Presence is now running in the background. Currently there is no tray icon, the software will run in the background. You can exit DAWPresence by running the executable again", "DAW Presence", MessageBoxButtons.OK, MessageBoxIcon.Information);
         
         // // Add tray icon
         // trayIcon = new NotifyIcon();

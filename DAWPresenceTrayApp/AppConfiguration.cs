@@ -31,4 +31,9 @@ public class AppConfiguration
 	/// Custom image key to use
 	/// </summary>
 	public string CustomImageKey { get; set; } = "custom";
+	
+	/// <summary>
+	/// Enable hot reloading of the configuration file
+	/// </summary>
+	public bool Debug { get; set; } = false;
 }
