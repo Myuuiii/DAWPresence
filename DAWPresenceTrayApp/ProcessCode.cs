@@ -1,24 +1,48 @@
+using System.Net;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using DAWPresence;
 using DiscordRPC;
 using YamlDotNet.Serialization;
 
 namespace DAWPresenceTrayApp;
 
-public partial class DAWRichPresenceTrayApp : Form
+public class ProcessCode
 {
+    private const string VERSION = "beta-0.1.5";
+
+    [DllImport("user32.dll")]
+    static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
+
+    const int SW_HIDE = 0;
+    
     // config in the appdata folder
-    private const string CONFIG_FILE_NAME = "C:\\Users\\%USERNAME%\\AppData\\Roaming\\DAWPresence\\config.yml";
-
+    private const string CONFIG_FILE_NAME = "./config.yml";
     private const string CREDIT = "DAWPresence by @Myuuiii#0001";
-    private readonly AppConfiguration _configuration;
-    private DiscordRpcClient? client;
-    private DateTime? startTime;
+    private static AppConfiguration _configuration;
+    private static DiscordRpcClient? client;
+    private static DateTime? startTime;
 
-    public DAWRichPresenceTrayApp()
+    public ProcessCode()
     {
-        InitializeComponent();
+        // Program.trayIcon.ShowBalloonTip(2000, "DAW Presence", "DAW Presence is running in the background", ToolTipIcon.Info);
+        ApplicationConfiguration.Initialize();
 
+        string? latestVersion = null;
+        try
+        {
+            latestVersion = new WebClient().DownloadString("https://minio.myuuiii.com/mversion/dawpresence.txt");
+            Console.WriteLine($"Latest version: {latestVersion}");
+            if (latestVersion != VERSION)
+            {
+                MessageBox.Show($"A new version of DAW Presence is available: {latestVersion}. Please download it from the official GitHub page https://github.com/Myuuiii/DAWPresence", "DAW Presence", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+        catch (WebException e)
+        {
+            MessageBox.Show($"An error occurred while checking for updates: {e.Message}", "DAW Presence", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+        
         // Make sure the entire directory exists
         if (!Directory.Exists(Path.GetDirectoryName(CONFIG_FILE_NAME)))
             Directory.CreateDirectory(Path.GetDirectoryName(CONFIG_FILE_NAME));
@@ -39,9 +63,10 @@ public partial class DAWRichPresenceTrayApp : Form
         }
         
         ExecuteTaskAsync().GetAwaiter().GetResult();
-    }
 
-    protected async Task ExecuteTaskAsync()
+    }
+    
+    protected static async Task ExecuteTaskAsync()
     {
         IEnumerable<Daw?> registeredDaws = Assembly.GetExecutingAssembly().GetTypes()
             .Where(t => t.IsSubclassOf(typeof(Daw)))
