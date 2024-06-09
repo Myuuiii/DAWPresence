@@ -6,7 +6,8 @@ namespace DAWPresence;
 
 internal sealed class Worker : BackgroundService
 {
-	private const string CONFIG_FILE_NAME = "config.yml";
+	// config in the appdata folder
+	private const string CONFIG_FILE_NAME = "C:\\Users\\%USERNAME%\\AppData\\Roaming\\DAWPresence\\config.yml";
 
 	private const string CREDIT = "DAWPresence by @Myuuiii#0001";
 	private readonly ILogger<Worker> _logger;
@@ -17,6 +18,10 @@ internal sealed class Worker : BackgroundService
 	public Worker(ILogger<Worker> logger)
 	{
 		_logger = logger;
+		// Make sure the entire directory exists
+		if (!Directory.Exists(Path.GetDirectoryName(CONFIG_FILE_NAME)))
+			Directory.CreateDirectory(Path.GetDirectoryName(CONFIG_FILE_NAME));
+		
 		if (File.Exists(CONFIG_FILE_NAME))
 		{
 			_logger.LogInformation("Loading configuration file...");
