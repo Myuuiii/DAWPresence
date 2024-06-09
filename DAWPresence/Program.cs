@@ -1,4 +1,3 @@
-using System.Security.Principal;
 using DAWPresence;
 
 HostApplicationBuilder builder = Host.CreateApplicationBuilder(args);

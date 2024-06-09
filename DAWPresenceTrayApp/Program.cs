@@ -1,17 +1,12 @@
-using System;
 using System.Diagnostics;
 using System.Net;
-using System.Runtime.InteropServices;
-using System.Windows.Forms;
-using DAWPresence;
-using DiscordRPC;
 
 namespace DAWPresenceTrayApp;
 
 static class Program
 {
     private const string VERSION = "beta-0.1.5";
-    private static ProcessCode processCode;
+    private static ProcessCode? processCode;
     public static NotifyIcon trayIcon;
 
     /// <summary>
@@ -32,7 +27,6 @@ static class Program
             }
             return;
         }
-        
 
         string? latestVersion = null;
         try
@@ -51,21 +45,6 @@ static class Program
         
         MessageBox.Show("DAW Presence is now running in the background. Currently there is no tray icon, the software will run in the background. You can exit DAWPresence by running the executable again", "DAW Presence", MessageBoxButtons.OK, MessageBoxIcon.Information);
         
-        // // Add tray icon
-        // trayIcon = new NotifyIcon();
-        // trayIcon.Text = "DAW Presence";
-        // trayIcon.Icon = new Icon("appicon.ico");
-        // trayIcon.Visible = true;
-
-        // // Make the application shut down through the tray icon when clicked
-        // trayIcon.MouseClick += (sender, args) =>
-        // {
-        //     if (args.Button == MouseButtons.Left)
-        //     {
-        //         Application.Exit();
-        //     }
-        // };
-
         processCode = new ProcessCode();
 
         Application.Run();

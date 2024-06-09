@@ -14,7 +14,7 @@
 
     <ItemGroup>
         <None Update="appicon.ico">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+            <CopyToOutputDirectory>Never</CopyToOutputDirectory>
         </None>
     </ItemGroup>
 
