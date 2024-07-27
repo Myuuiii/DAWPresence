@@ -5,7 +5,7 @@ namespace DAWPresenceBackgroundApp;
 
 static class Program
 {
-    private const string VERSION = "beta-0.1.5";
+    private const string VERSION = "beta-0.1.6";
     private static ProcessCode? processCode;
     public static NotifyIcon trayIcon;
     private const string ProcessName = "DAWPresenceBackgroundApp";
