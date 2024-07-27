@@ -5,7 +5,7 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAWPresence", "DAWPresence\DAWPresence.csproj", "{F0349D0B-DCB7-4B14-812F-B52B8A945029}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAWPresenceTrayApp", "DAWPresenceTrayApp\DAWPresenceTrayApp.csproj", "{A588754F-1362-4AE0-9277-082A1B588D90}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAWPresenceBackgroundApp", "DAWPresenceBackgroundApp\DAWPresenceBackgroundApp.csproj", "{A588754F-1362-4AE0-9277-082A1B588D90}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

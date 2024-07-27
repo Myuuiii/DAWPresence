@@ -7,7 +7,7 @@ public partial class DebugW : Daw
 {
     public DebugW()
     {
-        ProcessName = "DAWPresenceTrayApp";
+        ProcessName = "DAWPresenceBackgroundApp";
         DisplayName = ProcessName;
         ImageKey = "ableton-white";
         ApplicationId = "1053952444859686983";

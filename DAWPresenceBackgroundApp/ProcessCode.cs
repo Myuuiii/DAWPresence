@@ -5,7 +5,7 @@ using DAWPresence;
 using DiscordRPC;
 using YamlDotNet.Serialization;
 
-namespace DAWPresenceTrayApp;
+namespace DAWPresenceBackgroundApp;
 
 public class ProcessCode
 {

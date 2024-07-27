@@ -1,7 +1,7 @@
 using System.Diagnostics;
 using System.Net;
 
-namespace DAWPresenceTrayApp;
+namespace DAWPresenceBackgroundApp;
 
 static class Program
 {
@@ -18,10 +18,10 @@ static class Program
         ApplicationConfiguration.Initialize();
         
         // If the program is started again, shut down all instances and exit
-        if (Process.GetProcessesByName("DAWPresenceTrayApp").Length > 1)
+        if (Process.GetProcessesByName("DAWPresenceBackgroundApp").Length > 1)
         {
             MessageBox.Show("DAW Presence will now shut down", "DAW Presence", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            foreach (var process in Process.GetProcessesByName("DAWPresenceTrayApp"))
+            foreach (var process in Process.GetProcessesByName("DAWPresenceBackgroundApp"))
             {
                 process.Kill();
             }
