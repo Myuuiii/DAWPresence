@@ -7,23 +7,21 @@ A Discord Rich Presence app for several DAWs like FL Studio and Ableton.
 | ![](https://ss.myuuiii.com/Glf1gL6PvE.png) | ![](https://ss.myuuiii.com/Discord_edjjth5Bp5.png) |
 | :----------------------------------------: | :------------------------------------------------: |
 
-
 ## How to use
+
+- Make sure you have the latest .NET Desktop Runtime installed. You can download it [here through the official microsoft website](https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/runtime-desktop-8.0.6-windows-x64-installer)
 
 - Download the latest release from the [releases](https://github.com/Myuuiii/DAWPresence/releases/) tab.
 - Run the executable to create initial configuration file.
 - Close the software if you wish to customize the config and restart the software after saving your changes.
-- Upon running the software should show if it has detected a DAW that is currently supported. If it does, your Discord presence should be updated automatically.
+- Upon running the software, if it has detected a DAW that is currently supported, your Discord presence should be updated automatically.
 
-### Set up as a background service
 
-I will work out this section later ♥
 
 ## Roadmap
 
 If there's something you'd like to have implemented you can either send `myuuiii` a message on Discord or create an issue here on GitHub with the label "enhancement"
 
-- [ ] Add custom images for each distribution of Ableton Live
 - [ ] Discord's implementation of "time elapsed" only allows for 24 hours before wrapping back around to "00:00:00". Make it so it can also track longer periods of time
 
 ## Contributing
