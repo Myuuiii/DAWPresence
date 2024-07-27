@@ -8,6 +8,7 @@ static class Program
     private const string VERSION = "beta-0.1.5";
     private static ProcessCode? processCode;
     public static NotifyIcon trayIcon;
+    private const string ProcessName = "DAWPresenceBackgroundApp";
 
     /// <summary>
     ///  The main entry point for the application.
@@ -18,10 +19,10 @@ static class Program
         ApplicationConfiguration.Initialize();
         
         // If the program is started again, shut down all instances and exit
-        if (Process.GetProcessesByName("DAWPresenceBackgroundApp").Length > 1)
+        if (Process.GetProcessesByName(ProcessName).Length > 1)
         {
             MessageBox.Show("DAW Presence will now shut down", "DAW Presence", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            foreach (var process in Process.GetProcessesByName("DAWPresenceBackgroundApp"))
+            foreach (var process in Process.GetProcessesByName(ProcessName))
             {
                 process.Kill();
             }
