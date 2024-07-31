@@ -9,7 +9,7 @@ namespace DAWPresenceBackgroundApp;
 
 public class ProcessCode
 {
-    private const string VERSION = "beta-0.1.6";
+    private const string VERSION = "beta-0.1.7";
 
     [DllImport("user32.dll")]
     static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
