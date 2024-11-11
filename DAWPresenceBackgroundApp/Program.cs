@@ -5,7 +5,7 @@ namespace DAWPresenceBackgroundApp;
 
 static class Program
 {
-    private const string VERSION = "beta-0.1.8";
+    private const string VERSION = "beta-0.1.9";
     private static ProcessCode? processCode;
     public static NotifyIcon trayIcon;
     private const string ProcessName = "DAWPresenceBackgroundApp";
@@ -32,7 +32,7 @@ static class Program
         string? latestVersion = null;
         try
         {
-            latestVersion = new WebClient().DownloadString("https://minio.myuuiii.com/mversion/dawpresence.txt");
+            latestVersion = new WebClient().DownloadString("https://cdn.myuu.moe/v/dawpresence.txt");
             Console.WriteLine($"Latest version: {latestVersion}");
             if (latestVersion != VERSION)
             {

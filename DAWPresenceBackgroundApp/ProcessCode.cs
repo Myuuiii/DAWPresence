@@ -9,7 +9,7 @@ namespace DAWPresenceBackgroundApp;
 
 public class ProcessCode
 {
-    private const string VERSION = "beta-0.1.8";
+    private const string VERSION = "beta-0.1.9";
 
     [DllImport("user32.dll")]
     static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
@@ -31,7 +31,7 @@ public class ProcessCode
         string? latestVersion = null;
         try
         {
-            latestVersion = new WebClient().DownloadString("https://minio.myuuiii.com/mversion/dawpresence.txt");
+            latestVersion = new WebClient().DownloadString("https://cdn.myuu.moe/v/dawpresence.txt");
             Console.WriteLine($"Latest version: {latestVersion}");
             if (latestVersion != VERSION)
             {
