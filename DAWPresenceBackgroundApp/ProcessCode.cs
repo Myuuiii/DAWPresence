@@ -9,130 +9,121 @@ namespace DAWPresenceBackgroundApp;
 
 public class ProcessCode
 {
-    private const string VERSION = "beta-0.1.9";
-
-    [DllImport("user32.dll")]
-    static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
-
-    const int SW_HIDE = 0;
-    
-    // config in the appdata folder
-    private const string CONFIG_FILE_NAME = "./config.yml";
-    private const string CREDIT = "DAWPresence by @myuuiii";
+    private const string AppVersion = "beta-0.1.9";
+    private const int SwHide = 0;
+    private const string ConfigFilePath = "./config.yml";
+    private const string CreditText = "DAWPresence by @myuuiii";
     private static AppConfiguration _configuration;
-    private static DiscordRpcClient? client;
-    private static DateTime? startTime;
+    private static DiscordRpcClient? _client;
+    private static DateTime? _startTime;
 
     public ProcessCode()
     {
         // Program.trayIcon.ShowBalloonTip(2000, "DAW Presence", "DAW Presence is running in the background", ToolTipIcon.Info);
         ApplicationConfiguration.Initialize();
 
-        string? latestVersion = null;
+        CheckLatestVersion();
+        LoadConfiguration();
+        ExecuteTaskAsync().GetAwaiter().GetResult();
+    }
+
+    private static void CheckLatestVersion()
+    {
         try
         {
-            latestVersion = new WebClient().DownloadString("https://cdn.myuu.moe/v/dawpresence.txt");
+            var latestVersion = new WebClient().DownloadString("https://cdn.myuu.moe/v/dawpresence.txt");
             Console.WriteLine($"Latest version: {latestVersion}");
-            if (latestVersion != VERSION)
+
+            if (latestVersion != AppVersion)
             {
-                MessageBox.Show($"A new version of DAW Presence is available: {latestVersion}. Please download it from the official GitHub page https://github.com/Myuuiii/DAWPresence", "DAW Presence", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(
+                    $"A new version of DAW Presence is available: {latestVersion}. Please download it from the official GitHub page https://github.com/Myuuiii/DAWPresence",
+                    "DAW Presence", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
         catch (WebException e)
         {
-            MessageBox.Show($"An error occurred while checking for updates: {e.Message}", "DAW Presence", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show($"An error occurred while checking for updates: {e.Message}", "DAW Presence",
+                MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
-        
-        // Make sure the entire directory exists
-        if (!Directory.Exists(Path.GetDirectoryName(CONFIG_FILE_NAME)))
-            Directory.CreateDirectory(Path.GetDirectoryName(CONFIG_FILE_NAME));
+    }
 
-        if (File.Exists(CONFIG_FILE_NAME))
+    private static void LoadConfiguration()
+    {
+        if (!Directory.Exists(Path.GetDirectoryName(ConfigFilePath)))
+            Directory.CreateDirectory(Path.GetDirectoryName(ConfigFilePath));
+
+        if (File.Exists(ConfigFilePath))
         {
-            _configuration =
-                new Deserializer().Deserialize<AppConfiguration>(
-                    File.ReadAllText(CONFIG_FILE_NAME));
+            _configuration = new Deserializer().Deserialize<AppConfiguration>(File.ReadAllText(ConfigFilePath));
             Console.WriteLine("Configuration Loaded");
         }
         else
         {
             _configuration = new AppConfiguration();
-            File.WriteAllText(CONFIG_FILE_NAME,
-                new SerializerBuilder().Build().Serialize(_configuration));
+            File.WriteAllText(ConfigFilePath, new SerializerBuilder().Build().Serialize(_configuration));
             Console.WriteLine("Configuration Created");
         }
-        
-        ExecuteTaskAsync().GetAwaiter().GetResult();
-
     }
-    
+
     protected static async Task ExecuteTaskAsync()
     {
-        IEnumerable<Daw?> registeredDaws = Assembly.GetExecutingAssembly().GetTypes()
+        IEnumerable<Daw?> dawInstances = Assembly.GetExecutingAssembly().GetTypes()
             .Where(t => t.IsSubclassOf(typeof(Daw)))
             .Select(t => (Daw?)Activator.CreateInstance(t));
-        IEnumerable<Daw?> regDawArray = registeredDaws as Daw[] ?? registeredDaws.ToArray();
 
-        foreach (Daw? r in regDawArray)
+        var registeredDawArray = dawInstances as Daw[] ?? dawInstances.ToArray();
+        foreach (var daw in registeredDawArray)
         {
-            if (r != null)
-            {
-                Console.WriteLine($"{r.DisplayName} has been registered");
-            }
-            else
-            {
-                Console.WriteLine("A null DAW instance was found in regDawArray");
-            }
+            Console.WriteLine(
+                $"{daw?.DisplayName ?? "A null DAW instance was found in registeredDawArray"} has been registered");
         }
 
         while (true)
         {
             if (_configuration.Debug)
             {
-                _configuration =
-                    new Deserializer().Deserialize<AppConfiguration>(
-                        File.ReadAllText(CONFIG_FILE_NAME)); 
+                _configuration = new Deserializer().Deserialize<AppConfiguration>(File.ReadAllText(ConfigFilePath));
             }
-           
-            Daw? daw = regDawArray.FirstOrDefault(d => d.IsRunning);
-            if (daw is null)
+
+            var runningDaw = registeredDawArray.FirstOrDefault(d => d.IsRunning);
+            if (runningDaw is null)
             {
-                client?.ClearPresence();
-                client?.Dispose();
-                startTime = null;
+                _client?.ClearPresence();
+                _client?.Dispose();
+                _startTime = null;
                 Console.WriteLine("No DAW is running");
                 return;
             }
 
-            startTime ??= DateTime.UtcNow;
+            _startTime ??= DateTime.UtcNow;
+            Console.WriteLine("Detected: " + runningDaw.DisplayName);
+            Console.WriteLine("Project: " + runningDaw.GetProjectNameFromProcessWindow());
 
-            Console.WriteLine("Detected: " + daw.DisplayName);
-            Console.WriteLine("Project: " + daw.GetProjectNameFromProcessWindow());
-
-            if (client is null || client.ApplicationID != daw.ApplicationId)
+            if (_client is null || _client.ApplicationID != runningDaw.ApplicationId)
             {
-                client?.ClearPresence();
-                client?.Dispose();
-                client = new DiscordRpcClient(daw.ApplicationId);
-                client.Initialize();
+                _client?.ClearPresence();
+                _client?.Dispose();
+                _client = new DiscordRpcClient(runningDaw.ApplicationId);
+                _client.Initialize();
             }
 
-            client.SetPresence(new RichPresence
+            _client.SetPresence(new RichPresence
             {
-                Details = daw.GetProjectNameFromProcessWindow() != ""
-                    ? _configuration.WorkingPrefixText + daw.GetProjectNameFromProcessWindow()
+                Details = !string.IsNullOrEmpty(runningDaw.GetProjectNameFromProcessWindow())
+                    ? _configuration.WorkingPrefixText + runningDaw.GetProjectNameFromProcessWindow()
                     : _configuration.IdleText,
                 State = "",
                 Assets = new Assets
                 {
                     LargeImageKey = _configuration.UseCustomImage
                         ? _configuration.CustomImageKey
-                        : daw.ImageKey,
-                    LargeImageText = CREDIT
+                        : runningDaw.ImageKey,
+                    LargeImageText = CreditText
                 },
                 Timestamps = new Timestamps
                 {
-                    Start = startTime?.Add(-_configuration.Offset)
+                    Start = _startTime?.Add(-_configuration.Offset)
                 }
             });
 
