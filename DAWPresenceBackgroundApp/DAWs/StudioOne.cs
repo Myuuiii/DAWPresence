@@ -19,8 +19,8 @@ public class StudioOne : Daw
 		Process? process = GetProcess();
 		if (process is null) return "";
 		string title = process.MainWindowTitle;
-		return title.Contains(WindowTrim)
-			? title[..^TitleOffset]
-			: "";
+		return title.StartsWith(WindowTrim)
+			? title[WindowTrim.Length..]
+			: "";;
 	}
 }
