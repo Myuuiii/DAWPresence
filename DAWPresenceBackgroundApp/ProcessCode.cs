@@ -9,7 +9,7 @@ namespace DAWPresenceBackgroundApp;
 
 public class ProcessCode
 {
-    private const string AppVersion = "beta-0.1.9";
+    private const string AppVersion = "beta-0.1.10";
     private const int SwHide = 0;
     private const string ConfigFilePath = "./config.yml";
     private const string CreditText = "DAWPresence by @myuuiii";
