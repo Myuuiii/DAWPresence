@@ -10,7 +10,7 @@ public class StudioOne : Daw
 		DisplayName = "Studio One";
 		ImageKey = "studio-one";
 		ApplicationId = "1222887221577781278";
-		WindowTrim = " - " + DisplayName;
+		WindowTrim = DisplayName + " - ";
 		TitleOffset = 13;
 	}
 
