@@ -7,11 +7,11 @@ public class BitwigStudio : Daw
 	public BitwigStudio()
 	{
 		ProcessName = "Bitwig Studio";
-		DisplayName = "Bitwig Studio";
+		DisplayName = "Bitwig Studio - ";
 		ImageKey = "icon";
 		ApplicationId = "";
 		WindowTrim = " - " + DisplayName;
-		TitleOffset = 15;
+		TitleOffset = 16;
 	}
 
 	public override string GetProjectNameFromProcessWindow()
