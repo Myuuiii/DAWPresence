@@ -36,4 +36,9 @@ public class AppConfiguration
 	/// Enable hot reloading of the configuration file
 	/// </summary>
 	public bool Debug { get; set; } = false;
+	
+	/// <summary>
+	/// Disable the popup when the app starts
+	/// </summary>
+	public bool DisablePopup { get; set; } = false;
 }

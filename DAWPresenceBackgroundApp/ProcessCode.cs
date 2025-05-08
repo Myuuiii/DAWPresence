@@ -9,21 +9,16 @@ namespace DAWPresenceBackgroundApp;
 
 public class ProcessCode
 {
-    private const string AppVersion = "beta-0.1.10";
+    private const string AppVersion = "beta-0.1.11";
     private const int SwHide = 0;
-    private const string ConfigFilePath = "./config.yml";
     private const string CreditText = "DAWPresence by @myuuiii";
-    private static AppConfiguration _configuration;
     private static DiscordRpcClient? _client;
     private static DateTime? _startTime;
 
     public ProcessCode()
     {
-        // Program.trayIcon.ShowBalloonTip(2000, "DAW Presence", "DAW Presence is running in the background", ToolTipIcon.Info);
         ApplicationConfiguration.Initialize();
-
         CheckLatestVersion();
-        LoadConfiguration();
         ExecuteTaskAsync().GetAwaiter().GetResult();
     }
 
@@ -48,24 +43,6 @@ public class ProcessCode
         }
     }
 
-    private static void LoadConfiguration()
-    {
-        if (!Directory.Exists(Path.GetDirectoryName(ConfigFilePath)))
-            Directory.CreateDirectory(Path.GetDirectoryName(ConfigFilePath));
-
-        if (File.Exists(ConfigFilePath))
-        {
-            _configuration = new Deserializer().Deserialize<AppConfiguration>(File.ReadAllText(ConfigFilePath));
-            Console.WriteLine("Configuration Loaded");
-        }
-        else
-        {
-            _configuration = new AppConfiguration();
-            File.WriteAllText(ConfigFilePath, new SerializerBuilder().Build().Serialize(_configuration));
-            Console.WriteLine("Configuration Created");
-        }
-    }
-
     protected static async Task ExecuteTaskAsync()
     {
         IEnumerable<Daw?> dawInstances = Assembly.GetExecutingAssembly().GetTypes()
@@ -81,11 +58,6 @@ public class ProcessCode
 
         while (true)
         {
-            if (_configuration.Debug)
-            {
-                _configuration = new Deserializer().Deserialize<AppConfiguration>(File.ReadAllText(ConfigFilePath));
-            }
-
             var runningDaw = registeredDawArray.FirstOrDefault(d => d.IsRunning);
             if (runningDaw is null)
             {
@@ -93,6 +65,7 @@ public class ProcessCode
                 _client?.Dispose();
                 _startTime = null;
                 Console.WriteLine("No DAW is running");
+                await Task.Delay(ConfigurationManager.Configuration.UpdateInterval);
                 return;
             }
 
@@ -111,23 +84,23 @@ public class ProcessCode
             _client.SetPresence(new RichPresence
             {
                 Details = !string.IsNullOrEmpty(runningDaw.GetProjectNameFromProcessWindow())
-                    ? _configuration.WorkingPrefixText + runningDaw.GetProjectNameFromProcessWindow()
-                    : _configuration.IdleText,
+                    ? ConfigurationManager.Configuration.WorkingPrefixText + runningDaw.GetProjectNameFromProcessWindow()
+                    : ConfigurationManager.Configuration.IdleText,
                 State = "",
                 Assets = new Assets
                 {
-                    LargeImageKey = _configuration.UseCustomImage
-                        ? _configuration.CustomImageKey
+                    LargeImageKey = ConfigurationManager.Configuration.UseCustomImage
+                        ? ConfigurationManager.Configuration.CustomImageKey
                         : runningDaw.ImageKey,
                     LargeImageText = CreditText
                 },
                 Timestamps = new Timestamps
                 {
-                    Start = _startTime?.Add(-_configuration.Offset)
+                    Start = _startTime?.Add(-ConfigurationManager.Configuration.Offset)
                 }
             });
 
-            await Task.Delay(_configuration.UpdateInterval);
+            await Task.Delay(ConfigurationManager.Configuration.UpdateInterval);
         }
     }
 }
