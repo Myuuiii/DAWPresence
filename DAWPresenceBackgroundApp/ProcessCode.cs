@@ -65,6 +65,7 @@ public class ProcessCode
                 _client?.Dispose();
                 _startTime = null;
                 Console.WriteLine("No DAW is running");
+                await Task.Delay(ConfigurationManager.Configuration.UpdateInterval);
                 return;
             }
 
