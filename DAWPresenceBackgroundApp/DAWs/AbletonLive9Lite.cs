@@ -12,7 +12,7 @@ public partial class AbletonLive9Lite : Daw
         ImageKey = "ableton";
         ApplicationId = "1053952444859686983";
         WindowTrim = " - " + DisplayName;
-        TitleOffset = 23;
+        TitleOffset = 22;
     }
 
     public override string GetProjectNameFromProcessWindow()
