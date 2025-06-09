@@ -66,7 +66,7 @@ public class ProcessCode
                 _startTime = null;
                 Console.WriteLine("No DAW is running");
                 await Task.Delay(ConfigurationManager.Configuration.UpdateInterval);
-                return;
+                continue;
             }
 
             _startTime ??= DateTime.UtcNow;
