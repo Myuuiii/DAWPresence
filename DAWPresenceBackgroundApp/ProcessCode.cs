@@ -9,7 +9,7 @@ namespace DAWPresenceBackgroundApp;
 
 public class ProcessCode
 {
-    private const string AppVersion = "beta-0.1.13";
+    private const string AppVersion = "beta-0.1.15";
     private const int SwHide = 0;
     private const string CreditText = "DAWPresence by @myuuiii";
     private static DiscordRpcClient? _client;
@@ -63,6 +63,7 @@ public class ProcessCode
             {
                 _client?.ClearPresence();
                 _client?.Dispose();
+                _client = null;
                 _startTime = null;
                 Console.WriteLine("No DAW is running");
                 await Task.Delay(ConfigurationManager.Configuration.UpdateInterval);
