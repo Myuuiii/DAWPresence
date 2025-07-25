@@ -19,7 +19,10 @@ public class Reason: Daw
         Process? process = GetProcess();
         if (process is null) return "";
         var title = process.MainWindowTitle;
-        var extIndex = title.LastIndexOf(".reason", StringComparison.OrdinalIgnoreCase);
-        return extIndex > 0 ? title.Substring(0, extIndex) : title;
+        // Only trim ".reason" if present in the window title
+        var extIndex = title.IndexOf(".reason", StringComparison.OrdinalIgnoreCase);
+        if (extIndex > 0)
+            return title.Substring(0, extIndex);
+        return title;
     }
 }
