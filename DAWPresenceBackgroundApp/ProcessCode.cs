@@ -9,7 +9,7 @@ namespace DAWPresenceBackgroundApp;
 
 public class ProcessCode
 {
-    private const string AppVersion = "beta-0.1.15";
+    private const string AppVersion = "beta-0.1.16";
     private const int SwHide = 0;
     private const string CreditText = "DAWPresence by @myuuiii";
     private static DiscordRpcClient? _client;
