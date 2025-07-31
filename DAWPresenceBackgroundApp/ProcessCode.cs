@@ -9,7 +9,7 @@ namespace DAWPresenceBackgroundApp;
 
 public class ProcessCode
 {
-    private const string AppVersion = "beta-0.1.15";
+    private const string AppVersion = "beta-0.1.16";
     private const int SwHide = 0;
     private const string CreditText = "DAWPresence by @myuuiii";
     private static DiscordRpcClient? _client;
@@ -84,9 +84,9 @@ public class ProcessCode
 
             _client.SetPresence(new RichPresence
             {
-                Details = !string.IsNullOrEmpty(runningDaw.GetProjectNameFromProcessWindow())
+                Details = !runningDaw.HideDetails && !string.IsNullOrEmpty(runningDaw.GetProjectNameFromProcessWindow())
                     ? ConfigurationManager.Configuration.WorkingPrefixText + runningDaw.GetProjectNameFromProcessWindow()
-                    : ConfigurationManager.Configuration.IdleText,
+                    : runningDaw.HideDetails ? null : ConfigurationManager.Configuration.IdleText,
                 State = "",
                 Assets = new Assets
                 {
