@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAWPresenceBackgroundApp", "DAWPresenceBackgroundApp\DAWPresenceBackgroundApp.csproj", "{A588754F-1362-4AE0-9277-082A1B588D90}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Detect", "Detect\Detect.csproj", "{72AF74BE-0103-47B0-9F44-FC572A820E87}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{A588754F-1362-4AE0-9277-082A1B588D90}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A588754F-1362-4AE0-9277-082A1B588D90}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A588754F-1362-4AE0-9277-082A1B588D90}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72AF74BE-0103-47B0-9F44-FC572A820E87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72AF74BE-0103-47B0-9F44-FC572A820E87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72AF74BE-0103-47B0-9F44-FC572A820E87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72AF74BE-0103-47B0-9F44-FC572A820E87}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
