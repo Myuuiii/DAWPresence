@@ -6,7 +6,7 @@ public class SeratoDjPro : Daw
     {
         ProcessName = "Serato DJ Pro";
         DisplayName = "Serato DJ Pro";
-        ImageKey = "sdjp";
+        ImageKey = "serrato";
         ApplicationId = "1400470240533545040";
         WindowTrim = string.Empty;
         TitleOffset = 0;
