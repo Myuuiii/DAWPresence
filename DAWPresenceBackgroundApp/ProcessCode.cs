@@ -84,9 +84,9 @@ public class ProcessCode
 
             _client.SetPresence(new RichPresence
             {
-                Details = !string.IsNullOrEmpty(runningDaw.GetProjectNameFromProcessWindow())
+                Details = !runningDaw.HideDetails && !string.IsNullOrEmpty(runningDaw.GetProjectNameFromProcessWindow())
                     ? ConfigurationManager.Configuration.WorkingPrefixText + runningDaw.GetProjectNameFromProcessWindow()
-                    : ConfigurationManager.Configuration.IdleText,
+                    : runningDaw.HideDetails ? null : ConfigurationManager.Configuration.IdleText,
                 State = "",
                 Assets = new Assets
                 {

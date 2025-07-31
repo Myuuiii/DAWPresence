@@ -10,6 +10,7 @@ public class SeratoDjPro : Daw
         ApplicationId = "1400470240533545040";
         WindowTrim = string.Empty;
         TitleOffset = 0;
+        HideDetails = true;
     }
 
     public override string GetProjectNameFromProcessWindow() =>
