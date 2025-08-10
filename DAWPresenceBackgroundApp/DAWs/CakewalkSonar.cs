@@ -10,7 +10,7 @@ public class CakewalkSonar : Daw
         DisplayName = "Cakewalk Sonar - ";
         ImageKey = "icon";
         ApplicationId = "";
-        WindowTrim = " - " + DisplayName;
+        WindowTrim = DisplayName + " - ";
         TitleOffset = 17;
     }
 
