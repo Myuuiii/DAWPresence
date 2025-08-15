@@ -1,9 +1,6 @@
 ﻿namespace DAWPresence.DAWs;
 
-using System.Diagnostics;
-using static System.Diagnostics.Process;
-
-public partial class SteinbergNuendo : Daw
+public class SteinbergNuendo : Daw
 {
     public SteinbergNuendo()
     {
@@ -16,17 +13,18 @@ public partial class SteinbergNuendo : Daw
 
     public override string GetProjectNameFromProcessWindow()
     {
-        Process? process = GetProcess();
+        var process = GetProcess();
         if (process is null) return "";
-        string title = process.MainWindowTitle;
+        var title = process.MainWindowTitle;
 
-       
-        int trimIndex = title.IndexOf(WindowTrim);
+
+        var trimIndex = title.IndexOf(WindowTrim);
         if (trimIndex != -1)
         {
-            int titleOffset = trimIndex + WindowTrim.Length;
+            var titleOffset = trimIndex + WindowTrim.Length;
             return title[titleOffset..];
         }
+
         return "";
     }
 }

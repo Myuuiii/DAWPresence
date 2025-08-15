@@ -1,8 +1,6 @@
-﻿using System.Diagnostics;
+﻿namespace DAWPresence.DAWs;
 
-namespace DAWPresence.DAWs;
-
-public class Reason: Daw
+public class Reason : Daw
 {
     public Reason()
     {
@@ -16,7 +14,7 @@ public class Reason: Daw
 
     public override string GetProjectNameFromProcessWindow()
     {
-        Process? process = GetProcess();
+        var process = GetProcess();
         if (process is null) return "";
         var title = process.MainWindowTitle;
         // Only trim ".reason" if present in the window title

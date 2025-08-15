@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-
-namespace DAWPresence.DAWs;
+﻿namespace DAWPresence.DAWs;
 
 public class CakewalkSonar : Daw
 {
@@ -16,9 +14,9 @@ public class CakewalkSonar : Daw
 
     public override string GetProjectNameFromProcessWindow()
     {
-        Process? process = GetProcess();
+        var process = GetProcess();
         if (process is null) return "";
-        string title = process.MainWindowTitle;
+        var title = process.MainWindowTitle;
         return title.Contains(WindowTrim)
             ? title[..^TitleOffset]
             : "";

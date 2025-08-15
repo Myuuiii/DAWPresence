@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-
-namespace DAWPresence.DAWs;
+﻿namespace DAWPresence.DAWs;
 
 public class Renoise : Daw
 {
@@ -13,12 +11,12 @@ public class Renoise : Daw
         WindowTrim = string.Empty;
         TitleOffset = 0;
     }
-    
+
     public override string GetProjectNameFromProcessWindow()
     {
-        Process? process = GetProcess();
+        var process = GetProcess();
         if (process is null) return string.Empty;
-        string title = process.MainWindowTitle;
+        var title = process.MainWindowTitle;
         if (string.IsNullOrEmpty(title)) return string.Empty;
         var dashIndex = title.IndexOf(" - ", StringComparison.Ordinal);
         if (dashIndex > 0)
@@ -28,6 +26,7 @@ public class Renoise : Daw
                 return projectPart.Substring(0, projectPart.Length - 5); // Remove ".xrns"
             return projectPart;
         }
+
         return title;
     }
 }
