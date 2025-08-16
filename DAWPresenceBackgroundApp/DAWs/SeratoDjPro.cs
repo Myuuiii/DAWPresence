@@ -2,7 +2,7 @@
 
 public class SeratoDjPro : Daw
 {
-    public SeratoDjPro() : base()
+    public SeratoDjPro()
     {
         ProcessName = "Serato DJ Pro";
         DisplayName = "Serato DJ Pro";
@@ -13,7 +13,9 @@ public class SeratoDjPro : Daw
         HideDetails = true;
     }
 
-    public override string GetProjectNameFromProcessWindow() =>
+    public override string GetProjectNameFromProcessWindow()
+    {
         // Does not have a project name in the window title 
-        string.Empty;
+        return string.Empty;
+    }
 }

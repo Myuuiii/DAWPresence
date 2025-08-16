@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 
 namespace DAWPresence.DAWs;
 
@@ -17,9 +16,9 @@ public partial class AbletonLive10Lite : Daw
 
     public override string GetProjectNameFromProcessWindow()
     {
-        Process? process = GetProcess();
+        var process = GetProcess();
         if (process is null) return "";
-        string title = process.MainWindowTitle;
+        var title = process.MainWindowTitle;
         return title.Contains(WindowTrim)
             ? TitleRegex().Match(title[..^TitleOffset]).Value
             : "";
