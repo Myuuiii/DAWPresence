@@ -2,16 +2,16 @@
 
 namespace DAWPresence.DAWs;
 
-public partial class AbletonLive12Lite : Daw
+public partial class AbletonLive12Standard : Daw
 {
-    public AbletonLive12Lite()
+    public AbletonLive12Standard()
     {
-        ProcessName = "Ableton Live 12 Lite";
+        ProcessName = "Ableton Live 12 Standard";
         DisplayName = ProcessName;
         ImageKey = "ableton";
         ApplicationId = "1053952444859686983";
         WindowTrim = " - " + DisplayName;
-        TitleOffset = 23;
+        TitleOffset = 27;
     }
 
     public override string GetProjectNameFromProcessWindow()

@@ -1,15 +1,15 @@
 ﻿namespace DAWPresence.DAWs;
 
-public class FLStudio64Bit : Daw
+public class CakewalkSonar : Daw
 {
-    public FLStudio64Bit()
+    public CakewalkSonar()
     {
-        ProcessName = "FL64";
-        DisplayName = "FL Studio";
-        ImageKey = "fl";
-        ApplicationId = "1053779878916395048";
-        WindowTrim = " - " + DisplayName;
-        TitleOffset = 15;
+        ProcessName = "Cakewalk Sonar";
+        DisplayName = "Cakewalk Sonar - ";
+        ImageKey = "icon";
+        ApplicationId = "";
+        WindowTrim = DisplayName + " - ";
+        TitleOffset = 17;
     }
 
     public override string GetProjectNameFromProcessWindow()

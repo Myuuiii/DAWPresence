@@ -1,11 +1,11 @@
 namespace DAWPresence.DAWs;
 
-public class Cubase13 : Daw
+public class Cubase14 : Daw
 {
-    public Cubase13()
+    public Cubase14()
     {
-        ProcessName = "Cubase13";
-        DisplayName = "Cubase 13";
+        ProcessName = "Cubase14";
+        DisplayName = "Cubase 14";
         ImageKey = "image";
         ApplicationId = "1223993322243362898";
         WindowTrim = "Cubase Pro Project - ";

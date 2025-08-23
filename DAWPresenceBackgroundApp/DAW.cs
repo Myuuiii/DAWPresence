@@ -35,10 +35,10 @@ public abstract class Daw
 	/// </summary>
 	public string ApplicationId { get; protected init; }
 
-    /// <summary>
-    ///     If true, hides the details field in Discord Rich Presence
-    /// </summary>
-    public bool HideDetails { get; protected init; } = false;
+	/// <summary>
+	///     If true, hides the details field in Discord Rich Presence
+	/// </summary>
+	public bool HideDetails { get; protected init; } = false;
 
 	/// <summary>
 	///     Return the amount of processes with the name of the DAW
@@ -60,5 +60,8 @@ public abstract class Daw
 	///     Get the first process with the name of the DAW
 	/// </summary>
 	/// <returns></returns>
-	protected Process GetProcess() => Process.GetProcessesByName(ProcessName).First();
+	protected Process GetProcess()
+    {
+        return Process.GetProcessesByName(ProcessName).First();
+    }
 }
