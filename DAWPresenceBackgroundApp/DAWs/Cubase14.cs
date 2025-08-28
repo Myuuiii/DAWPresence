@@ -17,8 +17,10 @@ public class Cubase14 : Daw
         var process = GetProcess();
         if (process is null) return "";
         var title = process.MainWindowTitle;
-        return title.Contains(WindowTrim)
-            ? title.Replace(WindowTrim, "")
-            : "";
+        const string prefix = "Cubase Pro Project by ";
+        if (!title.StartsWith(prefix)) return "";
+        var rest = title.Substring(prefix.Length);
+        var parts = rest.Split(" - ");
+        return parts.Length > 1 ? parts[^1] : "";
     }
 }
