@@ -9,8 +9,8 @@ public partial class Rekordbox : Daw
     {
         ProcessName = "rekordbox";
         DisplayName = "Rekordbox";
-        ImageKey = "rekordbox-white";
-        ApplicationId = "";
+        ImageKey = "rekordbox";
+        ApplicationId = "1411684427909566506";
         WindowTrim = " - " + DisplayName;
         TitleOffset = 12; 
     }
