@@ -11,19 +11,12 @@ public partial class Rekordbox : Daw
         DisplayName = "Rekordbox";
         ImageKey = "rekordbox";
         ApplicationId = "1411684427909566506";
-        WindowTrim = " - " + DisplayName;
-        TitleOffset = 12; 
+        WindowTrim = DisplayName;
+        TitleOffset = 12;
+        HideDetails = true;
     }
 
-    public override string GetProjectNameFromProcessWindow()
-    {
-        var process = GetProcess();
-        if (process == null) return "";
-        var title = process.MainWindowTitle;
-        return title.Contains(WindowTrim)
-            ? TitleRegex().Match(title[..^TitleOffset]).Value
-            : "";
-    }
+    public override string GetProjectNameFromProcessWindow() => string.Empty;
 
     [GeneratedRegex("[^\\[]*")]
     private static partial Regex TitleRegex();
