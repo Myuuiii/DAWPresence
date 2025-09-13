@@ -7,7 +7,7 @@ public class FLStudioMobile : Daw
         ProcessName = "FLMobile.UWP";
         DisplayName = "FL Studio Mobile";
         ImageKey = "flm";
-        ApplicationId = "";
+        ApplicationId = "1416423031256911994";
         WindowTrim = string.Empty;
         TitleOffset = 0;
         HideDetails = true;
