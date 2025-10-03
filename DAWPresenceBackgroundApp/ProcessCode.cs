@@ -7,7 +7,7 @@ namespace DAWPresenceBackgroundApp;
 
 public class ProcessCode
 {
-    private const string AppVersion = "beta-0.2.3";
+    private const string AppVersion = "beta-0.2.4";
     private const string CreditText = "DAWPresence by @myuuiii";
     private const string StartupRegistryPath = "Software\\Microsoft\\Windows\\CurrentVersion\\Run";
     private static DiscordRpcClient? _client;
