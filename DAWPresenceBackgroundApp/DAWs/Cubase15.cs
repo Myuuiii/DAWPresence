@@ -17,7 +17,7 @@ public class Cubase15 : Daw
         var process = GetProcess();
         if (process is null) return "";
         var title = process.MainWindowTitle;
-        const string prefix = "Cubase Pro Project by ";
+        const string prefix = "Cubase Pro Project - ";
         if (!title.StartsWith(prefix)) return "";
         var rest = title.Substring(prefix.Length);
         var parts = rest.Split(" - ");
