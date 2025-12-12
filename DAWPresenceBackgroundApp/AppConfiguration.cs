@@ -51,4 +51,15 @@ public class AppConfiguration
 	///     Whether the app should add itself to Windows startup
 	/// </summary>
 	public bool OpenOnStartup { get; set; } = true;
+
+    /// <summary>
+    ///    Enable secret mode to hide project details
+    /// </summary>
+    public bool SecretMode { get; set; } = false;
+
+    /// <summary>
+    ///     Text to show when secret mode is enabled
+    /// </summary>
+    public string SecretModeText { get; set; } = "Working on a secret project";
+
 }
