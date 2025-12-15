@@ -80,7 +80,9 @@ public class ProcessCode
 
             _client.SetPresence(new RichPresence
             {
-                Details = !runningDaw.HideDetails && !string.IsNullOrEmpty(runningDaw.GetProjectNameFromProcessWindow())
+                Details = ConfigurationManager.Configuration.SecretMode 
+                    ? ConfigurationManager.Configuration.SecretModeText 
+                    : !runningDaw.HideDetails && !string.IsNullOrEmpty(runningDaw.GetProjectNameFromProcessWindow())
                     ? ConfigurationManager.Configuration.WorkingPrefixText +
                       runningDaw.GetProjectNameFromProcessWindow()
                     : runningDaw.HideDetails

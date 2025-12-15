@@ -86,6 +86,10 @@ DisablePopup: false
 EnablePersistence: false
 # Reset elapsed time when switching projects
 ResetElapsedOnProjectSwitch: false
+# Enable secret mode to hide project details
+SecretMode: false
+# Text to show when secret mode is enabled
+SecretModeText: Working on a secret project
 ```
 
 ## Contributors
