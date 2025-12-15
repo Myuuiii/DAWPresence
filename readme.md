@@ -99,6 +99,8 @@ Special thanks to everyone who has contributed to DAWPresence, including code, i
 - **myuuiii** - Creator & main developer
 - **[Simoxus](https://github.com/Simoxus)** - Helped with tray icon, better config loading, installing on startup, and more.
 - **[Intancote](https://github.com/Intancote)** - Added FL Studio Mobile
+- **[Ahontt](https://github.com/ahontt)** - Fixed Cubase 15 detection
+- **[Alixti](https://github.com/alixti)** - Added secret project to hide project details
 
 If you have contributed and would like to be mentioned here, feel free to open a pull request!!
 
