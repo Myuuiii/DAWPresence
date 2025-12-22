@@ -8,7 +8,7 @@ public class Cubase15 : Daw
         DisplayName = "Cubase 15";
         ImageKey = "image";
         ApplicationId = "1223993322243362898";
-        WindowTrim = "Cubase Pro Project - ";
+        WindowTrim = "Cubase";
         TitleOffset = 0;
     }
 
@@ -17,7 +17,7 @@ public class Cubase15 : Daw
         var process = GetProcess();
         if (process is null) return "";
         var title = process.MainWindowTitle;
-        const string prefix = "Cubase Pro Project - ";
+        const string prefix = "Cubase";
         if (!title.StartsWith(prefix)) return "";
         var rest = title.Substring(prefix.Length);
         var parts = rest.Split(" - ");
