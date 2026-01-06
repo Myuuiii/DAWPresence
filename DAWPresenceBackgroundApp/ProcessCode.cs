@@ -7,7 +7,7 @@ namespace DAWPresenceBackgroundApp;
 
 public class ProcessCode
 {
-    private const string AppVersion = "beta-0.2.6.1";
+    private const string AppVersion = "beta-0.2.6.2";
     private const string CreditText = "DAWPresence by @myuuiii";
     private const string StartupRegistryPath = "Software\\Microsoft\\Windows\\CurrentVersion\\Run";
     private static DiscordRpcClient? _client;
@@ -68,7 +68,12 @@ public class ProcessCode
 
             _startTime ??= DateTime.UtcNow;
             Console.WriteLine("Detected: " + runningDaw.DisplayName);
-            Console.WriteLine("Project: " + runningDaw.GetProjectNameFromProcessWindow());
+
+            // Get and trim project name (remove trailing whitespace and dashes)
+            var projectNameRaw = runningDaw.GetProjectNameFromProcessWindow();
+            var projectName = projectNameRaw.TrimEnd('-', ' ', '\t', '\r', '\n');
+
+            Console.WriteLine("Project: " + (string.IsNullOrEmpty(projectName) ? "(none)" : projectName));
 
             if (_client is null || _client.ApplicationID != runningDaw.ApplicationId)
             {
@@ -78,13 +83,14 @@ public class ProcessCode
                 _client.Initialize();
             }
 
+            var startTimestamp = _startTime.Value.Add(-ConfigurationManager.Configuration.Offset);
+
             _client.SetPresence(new RichPresence
             {
                 Details = ConfigurationManager.Configuration.SecretMode 
                     ? ConfigurationManager.Configuration.SecretModeText 
-                    : !runningDaw.HideDetails && !string.IsNullOrEmpty(runningDaw.GetProjectNameFromProcessWindow())
-                    ? ConfigurationManager.Configuration.WorkingPrefixText +
-                      runningDaw.GetProjectNameFromProcessWindow()
+                    : !runningDaw.HideDetails && !string.IsNullOrEmpty(projectName)
+                    ? ConfigurationManager.Configuration.WorkingPrefixText + projectName
                     : runningDaw.HideDetails
                         ? null
                         : ConfigurationManager.Configuration.IdleText,
@@ -98,7 +104,7 @@ public class ProcessCode
                 },
                 Timestamps = new Timestamps
                 {
-                    Start = _startTime.Value.Add(-ConfigurationManager.Configuration.Offset)
+                    Start = startTimestamp
                 }
             });
 
