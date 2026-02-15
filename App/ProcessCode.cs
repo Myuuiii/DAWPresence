@@ -1,15 +1,16 @@
-using System.Reflection;
 using DAWPresence;
 using DiscordRPC;
 using Microsoft.Win32;
+using System.Reflection;
 
 namespace DAWPresenceBackgroundApp;
 
 public class ProcessCode
 {
-    private const string AppVersion = "beta-0.2.6.3";
+    private static readonly string AppVersion = GetAppVersion();
     private const string CreditText = "DAWPresence by @myuuiii";
     private const string StartupRegistryPath = "Software\\Microsoft\\Windows\\CurrentVersion\\Run";
+
     private static DiscordRpcClient? _client;
     private static DateTime? _startTime;
 
@@ -31,8 +32,8 @@ public class ProcessCode
 
             if (latestVersion != AppVersion)
                 MessageBox.Show(
-                    $"A new version of DAW Presence is available: {latestVersion}. Please download it from the official GitHub page https://github.com/Myuuiii/DAWPresence",
-                    "DAW Presence", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    $"A new version of DAWPresence is available: {latestVersion}. Please download it from the official GitHub page https://github.com/Myuuiii/DAWPresence",
+                    "DAWPresence", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         catch (Exception e)
         {
@@ -87,8 +88,8 @@ public class ProcessCode
 
             _client.SetPresence(new RichPresence
             {
-                Details = ConfigurationManager.Configuration.SecretMode 
-                    ? ConfigurationManager.Configuration.SecretModeText 
+                Details = ConfigurationManager.Configuration.SecretMode
+                    ? ConfigurationManager.Configuration.SecretModeText
                     : !runningDaw.HideDetails && !string.IsNullOrEmpty(projectName)
                     ? ConfigurationManager.Configuration.WorkingPrefixText + projectName
                     : runningDaw.HideDetails
@@ -110,6 +111,24 @@ public class ProcessCode
 
             await Task.Delay(ConfigurationManager.Configuration.UpdateInterval);
         }
+    }
+
+    private static string GetAppVersion()
+    {
+        try
+        {
+            var versionFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "VERSION.txt");
+            if (File.Exists(versionFilePath))
+            {
+                return File.ReadAllText(versionFilePath).Trim();
+            }
+        }
+        catch (Exception)
+        {
+        }
+
+        // Fallback version
+        return "0.0.0";
     }
 
     /// <summary>
