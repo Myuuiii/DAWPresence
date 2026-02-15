@@ -5,37 +5,58 @@ A Discord Rich Presence app for several DAWs like FL Studio and Ableton.
 | ![](https://ss.myuuiii.com/82ded0e9-b1e8-479b-86e0-cba978a63ddd.png) | ![](https://ss.myuuiii.com/7634c47d-db45-4323-bc5c-7c6ab1993ea3.png) |
 | :----------------------------------------: | :------------------------------------------------: |
 
+---
 
-## How to use
+# How to Use
 
-- Make sure you have the latest .NET Desktop Runtime installed. You can download it [here through the official microsoft website](https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/runtime-desktop-8.0.6-windows-x64-installer)
-- Download the latest release from the [releases](https://github.com/Myuuiii/DAWPresence/releases/) tab.
+- Make sure you have the latest .NET Desktop Runtime installed. You can download it [here, through the official Microsoft website](https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/runtime-desktop-8.0.6-windows-x64-installer)
+- Download the latest release from the [Releases](https://github.com/Myuuiii/DAWPresence/releases/) tab.
+- You can download either the installer or portable version; and the steps for both are listed below
 - Run the executable to create initial configuration files. The software will continue to run in the background.
 - Close the software by running the executable again. You can change the config to your liking.
 - Upon running the software, if it has detected a DAW that is currently supported, your Discord presence should be updated automatically.
 
-### Running as a Background Service & Using the Tray Icon
+#### Installer process
+- Run "DAWPresence-installer.msi", and make sure you say Yes to any admin privileges the installer asks for
+- Once the installer finishes, you should have shortcuts to DAWPresence in both the Start Menu and Desktop
+- If you'd like to remove DAWPresence, you can do so at any time in Add/Remove Programs
+- By default, it installs in `C:\Program Files\DAWPresence`
+- You can run the application manually from `DAWPresence\App.exe`
 
-DAWPresence runs as a background app and provides a tray icon for easy access and management.
-
-#### How to Install and Run
-
-1. **Download & Extract:** Download the latest release and extract it to a folder of your choice.
-2. **Run the App:** Double-click the `DAWPresenceBackgroundApp.exe` file. The app will start in the background and show a tray icon in your Windows system tray (bottom-right corner).
-3. **Tray Icon Features:**
-	- **Right-click the tray icon** to access options such as exit, reload config, or open the config folder.
-	- **Left-click** may show status or bring up a menu (depending on version).
-4. **Auto-Start (Optional):** To have DAWPresence start automatically with Windows:
-	- **Right-click the tray icon** and check the `Open on Startup` option in the menu. This will automatically configure DAWPresence to launch with Windows using the built-in method.
-5. **Stopping the App:**
-	- Right-click the tray icon and select `Exit`, or run the executable again to close it.
+#### Portable process
+- Once the .zip is downloaded, extract it, and run `App.exe`
+- You're done :D
 
 ---
 
-## Contributing
+# Features
 
-### Adding a new DAW
+* ### WiX installer
+	Although completely optional (there's a portable version), it allows for easy installs/uninstalls of DAWPresence.
 
+* ### Low memory usage
+	Typically, the background application will only use about 10-20 MBs of RAM.
+
+* ### Tray icon
+	The tray icon shows up in the bottom-right corner of Windows (the system tray), and right-clicking allows you to access options, like exiting, restarting, or opening the config. Left-clicking may also show status or bring up a menu (depending on your version)
+
+* ### Auto-start
+	Right-click the tray icon, and check the `Open on Startup` option. This will automatically register DAWPresence to launch with Windows.
+
+* ### Stopping the background application
+	Right-click the tray icon, and literally just select `Exit`. You can also run the executable again to close it.
+
+---
+
+# Contributing
+
+## Building the installer
+WiX can be a bit finicky, but all you really have to do is:
+* Install [HeatWave](https://marketplace.visualstudio.com/items?itemName=FireGiant.FireGiantHeatWaveDev17). This provides support for WiX v4.
+* Build the `App` project
+* Build the `Installer` project
+
+## Adding a new DAW
 If you want to add a new DAW or want a maintainer to, you can do so by following the steps below:
 
 ### DIY:
@@ -50,7 +71,7 @@ If you want to add a new DAW or want a maintainer to, you can do so by following
 
 *Don't worry about the ApplicationId, one of the maintainers will provide those for you*
 
-### Requesting a new DAW
+## Requesting a new DAW
 
 - Create a new issue with the `DAW REQUEST` label
 - Provide the name of the DAW and any additional information that might be useful (such as window title when no project is loaded, and when a project is loaded)
@@ -60,7 +81,9 @@ If you want to add a new DAW or want a maintainer to, you can do so by following
 
 ## Custom Image Key
 
-Some people might want a custom image on the rich presence. To bump the project a bit, I am making this exclusive to people that have starred this repository. For those that have, please contact `myuuiii` on Discord for more information. An example is shown below
+Some people might want a custom image on the rich presence. To bump the project a bit, I am making this exclusive to people that have starred this repository. For those that have, please contact `myuuiii` on Discord for more information. 
+
+An example is shown below:
 
 ![](https://ss.myuuiii.com/7634c47d-db45-4323-bc5c-7c6ab1993ea3.png)
 
@@ -92,6 +115,8 @@ SecretMode: false
 SecretModeText: Working on a secret project
 ```
 
+---
+
 ## Contributors
 
 Special thanks to everyone who has contributed to DAWPresence, including code, ideas, testing, and feedback!
@@ -104,4 +129,3 @@ Special thanks to everyone who has contributed to DAWPresence, including code, i
 - **[ferdmusic](https://github.com/ferdmusic)** - Added support for Nuendo 13
 
 If you have contributed and would like to be mentioned here, feel free to open a pull request!!
-
