@@ -1,0 +1,14 @@
+﻿<Project Sdk="WixToolset.Sdk/6.0.2">
+	<PropertyGroup>
+		<OutputName>DAWPresence-installer</OutputName>
+
+		<!-- Read version and then pass to preprocessor -->
+		<VersionFile>$(SolutionDir)VERSION.txt</VersionFile>
+		<AppVersion>$([System.IO.File]::ReadAllText($(VersionFile)).Trim())</AppVersion>
+		<DefineConstants>AppVersion=$(AppVersion)</DefineConstants>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\App\App.csproj" />
+	</ItemGroup>
+</Project>

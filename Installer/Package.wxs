@@ -1,0 +1,101 @@
+﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+	<?define App_TargetDir=$(var.App.TargetDir)?>
+
+	<Package Name="DAWPresence"
+			 Language="1033"
+			 Version="$(var.AppVersion)"
+			 Manufacturer="Myuuiii"
+			 UpgradeCode="7bb018c7-5d26-4de2-a101-a1f64dd7e128">
+
+		<MajorUpgrade DowngradeErrorMessage="!(loc.DowngradeError)" />
+
+		<Feature Id="Main">
+			<ComponentGroupRef Id="ProductComponents" />
+		</Feature>
+	</Package>
+
+	<Fragment>
+		<StandardDirectory Id="ProgramFiles64Folder">
+			<Directory Id="INSTALLFOLDER" Name="DAWPresence" />
+		</StandardDirectory>
+
+		<StandardDirectory Id="ProgramMenuFolder">
+			<Directory Id="ApplicationProgramsFolder" Name="DAWPresence" />
+		</StandardDirectory>
+
+		<StandardDirectory Id="DesktopFolder" />
+	</Fragment>
+
+	<Fragment>
+		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+			<!-- Main -->
+			<Component>
+				<File Id="MainExe" Source="$(var.App_TargetDir)DAWPresence.exe" />
+
+				<!-- Start Menu shortcut -->
+				<Shortcut Id="StartMenuShortcut"
+						  Directory="ApplicationProgramsFolder"
+						  Name="DAWPresence"
+						  WorkingDirectory="INSTALLFOLDER"
+						  Icon="appicon.ico"
+						  IconIndex="0"
+						  Advertise="yes" />
+
+				<!-- Desktop shortcut (optional) -->
+				<Shortcut Id="DesktopShortcut"
+						  Directory="DesktopFolder"
+						  Name="DAWPresence"
+						  WorkingDirectory="INSTALLFOLDER"
+						  Icon="appicon.ico"
+						  IconIndex="0"
+						  Advertise="yes" />
+			</Component>
+
+			<Component>
+				<File Source="$(var.App_TargetDir)DAWPresence.dll" />
+			</Component>
+
+			<!-- Config files to include 'cause why not -->
+			<Component>
+				<File Source="$(var.SolutionDir)VERSION.txt" />
+			</Component>
+
+			<Component>
+				<File Source="$(var.App_TargetDir)DAWPresence.deps.json" />
+			</Component>
+
+			<Component>
+				<File Source="$(var.App_TargetDir)DAWPresence.runtimeconfig.json" />
+			</Component>
+
+			<!-- Dependencies -->
+			<Component>
+				<File Source="$(var.App_TargetDir)DiscordRPC.dll" />
+			</Component>
+
+			<Component>
+				<File Source="$(var.App_TargetDir)Newtonsoft.Json.dll" />
+			</Component>
+
+			<Component>
+				<File Source="$(var.App_TargetDir)YamlDotNet.dll" />
+			</Component>
+
+			<!-- Icon -->
+			<Component>
+				<File Source="$(var.App_TargetDir)appicon.ico" />
+			</Component>
+
+			<Component Id="ApplicationProgramsFolderCleanup" Directory="ApplicationProgramsFolder">
+				<RemoveFolder Id="CleanupApplicationProgramsFolder" On="uninstall" />
+				<RegistryValue Root="HKCU" Key="Software\Myuuiii\DAWPresence" Name="installed" Type="integer" Value="1" KeyPath="yes" />
+			</Component>
+		</ComponentGroup>
+	</Fragment>
+
+	<!-- Icon and properties -->
+	<Fragment>
+		<Icon Id="appicon.ico" SourceFile="$(var.App_TargetDir)appicon.ico" />
+		<Property Id="ARPPRODUCTICON" Value="appicon.ico" />
+	</Fragment>
+</Wix>
