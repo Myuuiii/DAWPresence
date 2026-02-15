@@ -1,5 +1,4 @@
 using System.Diagnostics;
-using System.Windows.Forms;
 
 namespace DAWPresenceBackgroundApp;
 
@@ -51,7 +50,7 @@ internal static class Program
     private static void HandleMultipleInstances()
     {
         if (!ConfigurationManager.Configuration.DisablePopup)
-            NotificationService.ShowNotification("DAW Presence", "DAW Presence will now shut down");
+            NotificationService.ShowNotification("DAWPresence", "DAWPresence will now shut down!");
 
         foreach (var process in Process.GetProcessesByName(ProcessName)) process.Kill();
     }
@@ -60,8 +59,8 @@ internal static class Program
     {
         if (!ConfigurationManager.Configuration.DisablePopup)
             NotificationService.ShowNotification(
-                "DAW Presence",
-                "DAW Presence is now running in the background. You can quit the app using the tray icon by right-clicking it and selecting Exit.");
+                "DAWPresence",
+                "DAWPresence is now running in the background. You can quit the app using the tray icon by right-clicking it and selecting Exit.");
     }
 
     public static void SetStartup(bool enable)
