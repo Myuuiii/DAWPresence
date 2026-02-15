@@ -1,27 +1,34 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <OutputType>WinExe</OutputType>
-        <TargetFramework>net8.0-windows</TargetFramework>
-        <Nullable>enable</Nullable>
-        <UseWindowsForms>true</UseWindowsForms>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <RuntimeIdentifier>win-x64</RuntimeIdentifier>
-        <PlatformTarget>x64</PlatformTarget>
-        <ApplicationIcon>appicon.ico</ApplicationIcon>
-        <PublishSingleFile>true</PublishSingleFile>
-    </PropertyGroup>
+	<PropertyGroup>
+		<AssemblyName>DAWPresence</AssemblyName>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net8.0-windows</TargetFramework>
+		<Nullable>enable</Nullable>
+		<UseWindowsForms>true</UseWindowsForms>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<RuntimeIdentifier>win-x64</RuntimeIdentifier>
+		<PlatformTarget>x64</PlatformTarget>
+		<PublishSingleFile>true</PublishSingleFile>
+		<ApplicationIcon>appicon.ico</ApplicationIcon>
+	</PropertyGroup>
 
-    <ItemGroup>
-        <PackageReference Include="DiscordRichPresence" Version="1.1.3.18" />
-        <PackageReference Include="YamlDotNet" Version="15.1.4" />
-    </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="DiscordRichPresence" Version="1.1.3.18" />
+		<PackageReference Include="YamlDotNet" Version="15.1.4" />
+	</ItemGroup>
 
-    <ItemGroup>
-      <None Remove="appicon.ico" />
-      <EmbeddedResource Include="appicon.ico">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </EmbeddedResource>
-    </ItemGroup>
+	<ItemGroup>
+		<None Remove="appicon.ico" />
+		<EmbeddedResource Include="appicon.ico">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</EmbeddedResource>
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Update="VERSION.txt">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
 
 </Project>
