@@ -57,7 +57,7 @@
 
 			<!-- Config files to include 'cause why not -->
 			<Component>
-				<File Source="$(var.SolutionDir)VERSION.txt" />
+				<File Source="$(var.App_TargetDir)VERSION.txt" />
 			</Component>
 
 			<Component>
