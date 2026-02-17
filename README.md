@@ -10,21 +10,21 @@ A Discord Rich Presence app for several DAWs like FL Studio and Ableton.
 # How to Use
 
 - Make sure you have the latest .NET Desktop Runtime installed. You can download it [here, through the official Microsoft website](https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/runtime-desktop-8.0.6-windows-x64-installer)
-- Download the latest release from the [Releases](https://github.com/Myuuiii/DAWPresence/releases/) tab.
+- Download the latest release from the [Releases](https://github.com/Myuuiii/DAWPresence/releases) tab.
 - You can download either the installer or portable version; and the steps for both are listed below
 - Run the executable to create initial configuration files. The software will continue to run in the background.
 - Close the software by running the executable again. You can change the config to your liking.
 - Upon running the software, if it has detected a DAW that is currently supported, your Discord presence should be updated automatically.
 
-#### Installer process
+### Installer process
 - Run "DAWPresence-installer.msi", and make sure you say Yes to any admin privileges the installer asks for
 - Once the installer finishes, you should have shortcuts to DAWPresence in both the Start Menu and Desktop
 - If you'd like to remove DAWPresence, you can do so at any time in Add/Remove Programs
 - By default, it installs in `C:\Program Files\DAWPresence`
-- You can run the application manually from `DAWPresence\App.exe`
+- You can run the application manually from `DAWPresence\DAWPresence.exe`
 
-#### Portable process
-- Once the .zip is downloaded, extract it, and run `App.exe`
+### Portable process
+- Once the .zip is downloaded, extract it, and run `DAWPresence.exe`
 - You're done :D
 
 ---
@@ -52,7 +52,7 @@ A Discord Rich Presence app for several DAWs like FL Studio and Ableton.
 
 ## Building the installer
 WiX can be a bit finicky, but all you really have to do is:
-* Install [HeatWave](https://marketplace.visualstudio.com/items?itemName=FireGiant.FireGiantHeatWaveDev17). This provides support for WiX v4.
+* Install [HeatWave](https://marketplace.visualstudio.com/items?itemName=FireGiant.FireGiantHeatWaveDev17). This provides support for WiX v4, although you can really use any tool that supports WiX v4 (other than the WiX toolset extension, as that only provides support for v3)
 * Build the `App` project
 * Build the `Installer` project
 
