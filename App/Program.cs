@@ -1,12 +1,10 @@
-using System.Diagnostics;
+using DAWPresence.Services;
 
-namespace DAWPresenceBackgroundApp;
+namespace DAWPresence;
 
 internal static class Program
 {
-    private const string ProcessName = "DAWPresenceBackgroundApp";
-    private static ProcessCode? _processCode;
-    private static TrayIcon? _trayIcon;
+    private static DiscordManager? _discordManager;
 
     /// <summary>
     ///     The main entry point for the application.
@@ -15,14 +13,16 @@ internal static class Program
     private static void Main()
     {
         var args = Environment.GetCommandLineArgs();
+
         if (IsArgPresent(args, "/uninstall"))
         {
-            ProcessCode.SetStartup("DAWPresence", null, false);
+            StartupManager.SetStartup(Constants.APP_NAME, null, false);
             return;
         }
 
         ApplicationConfiguration.Initialize();
-        ConfigurationManager.LoadConfiguration();
+        SettingsManager.LoadSettings();
+
         if (IsAnotherInstanceRunning())
         {
             HandleMultipleInstances();
@@ -30,13 +30,15 @@ internal static class Program
         }
 
         ShowStartupMessage();
-        _trayIcon = new TrayIcon(ConfigurationManager.ConfigFilePath);
-        _processCode = new ProcessCode();
-        Task.Run(() => _processCode.RunAsync());
+
+        using var trayManager = new TrayManager(SettingsManager.SettingsFilePath);
+
+        _discordManager = new DiscordManager();
+        Task.Run(() => _discordManager.RunAsync());
+
         Application.Run();
     }
 
-    // Checks if a specific argument is present in the command line args
     private static bool IsArgPresent(string[] args, string arg)
     {
         return args.Any(a => string.Equals(a, arg, StringComparison.OrdinalIgnoreCase));
@@ -44,30 +46,30 @@ internal static class Program
 
     private static bool IsAnotherInstanceRunning()
     {
-        return Process.GetProcessesByName(ProcessName).Length > 1;
+        return System.Diagnostics.Process.GetProcessesByName(Constants.APP_NAME).Length > 1;
     }
 
     private static void HandleMultipleInstances()
     {
-        if (!ConfigurationManager.Configuration.DisablePopup)
-            NotificationService.ShowNotification("DAWPresence", "DAWPresence will now shut down!");
+        if (!SettingsManager.Settings.DisablePopup)
+        {
+            ToastManager.ShowNotification(Constants.APP_NAME, $"{Constants.APP_NAME} will now shut down!");
+        }
 
-        foreach (var process in Process.GetProcessesByName(ProcessName)) process.Kill();
+        foreach (var process in System.Diagnostics.Process.GetProcessesByName(Constants.APP_NAME)
+                     .Where(p => p.Id != Environment.ProcessId))
+        {
+            process.Kill();
+        }
     }
 
     private static void ShowStartupMessage()
     {
-        if (!ConfigurationManager.Configuration.DisablePopup)
-            NotificationService.ShowNotification(
-                "DAWPresence",
-                "DAWPresence is now running in the background. You can quit the app using the tray icon by right-clicking it and selecting Exit.");
-    }
-
-    public static void SetStartup(bool enable)
-    {
-        var exePath = Process.GetCurrentProcess().MainModule?.FileName ?? string.Empty;
-        ProcessCode.SetStartup("DAWPresence", enable ? exePath : null, enable);
-        ConfigurationManager.Configuration.OpenOnStartup = enable;
-        ConfigurationManager.SaveConfiguration();
+        if (!SettingsManager.Settings.DisablePopup)
+        {
+            ToastManager.ShowNotification(
+                Constants.APP_NAME,
+                $"{Constants.APP_NAME} is now running in the background. You can quit the app using the tray icon by right-clicking it and selecting Exit.");
+        }
     }
 }
