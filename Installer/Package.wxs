@@ -6,6 +6,7 @@
 			 Manufacturer="Myuuiii"
 			 UpgradeCode="7bb018c7-5d26-4de2-a101-a1f64dd7e128">
 
+		<MediaTemplate EmbedCab="yes" />
 		<MajorUpgrade DowngradeErrorMessage="!(loc.DowngradeError)" />
 
 		<!-- Features -->
@@ -16,7 +17,7 @@
 			<ComponentRef Id="DesktopShortcutComponent" />
 		</Feature>
 
-		<!-- Unregister from startup on uninstall (or at least try to lol) -->
+		<!-- Unregister from startup on uninstall (or at least try to) -->
 		<CustomAction Id="UnregisterStartup"
 					  FileRef="MainExe"
 					  ExeCommand="/uninstall"
@@ -57,7 +58,7 @@
 
 			<!-- Config files to include 'cause why not -->
 			<Component>
-				<File Source="$(var.App_TargetDir)VERSION.txt" />
+				<File Source="$(var.App_TargetDir)version.txt" />
 			</Component>
 			<Component>
 				<File Source="$(var.App_TargetDir)DAWPresence.deps.json" />
@@ -77,17 +78,11 @@
 				<File Source="$(var.App_TargetDir)YamlDotNet.dll" />
 			</Component>
 
-			<!-- Icon -->
-			<Component>
-				<File Source="$(var.App_TargetDir)appicon.ico" />
-			</Component>
-
+			<!-- Cleanup folders on uninstall -->
 			<Component Id="ApplicationProgramsFolderCleanup" Directory="ApplicationProgramsFolder">
 				<RemoveFolder Id="CleanupApplicationProgramsFolder" On="uninstall" />
 				<RegistryValue Root="HKCU" Key="Software\Myuuiii\DAWPresence" Name="installed" Type="integer" Value="1" KeyPath="yes" />
 			</Component>
-
-			<!-- Install folder cleanup on uninstall -->
 			<Component Id="InstallFolderCleanup" Directory="INSTALLFOLDER">
 				<RemoveFolder Id="CleanupInstallFolder" On="uninstall" />
 				<RegistryValue Root="HKCU" Key="Software\Myuuiii\DAWPresence" Name="installfolder" Type="integer" Value="1" KeyPath="yes" />
@@ -98,18 +93,24 @@
 		<!-- Desktop shortcut -->
 		<Component Id="DesktopShortcutComponent" Directory="DesktopFolder">
 			<Shortcut Id="DesktopShortcut"
-					  Name="DAWPresence"
-					  WorkingDirectory="INSTALLFOLDER"
-					  Icon="appicon.ico"
-					  IconIndex="0"
-					  Advertise="yes" />
-			<RegistryValue Root="HKCU" Key="Software\Myuuiii\DAWPresence" Name="desktopshortcut" Type="integer" Value="1" KeyPath="yes" />
+						  Name="DAWPresence"
+						  Target="[INSTALLFOLDER]DAWPresence.exe"
+						  WorkingDirectory="INSTALLFOLDER"
+						  Icon="appicon.ico"
+						  IconIndex="0"
+						  Advertise="no" />
+			<RegistryValue Root="HKCU"
+						   Key="Software\Myuuiii\DAWPresence"
+						   Name="desktopshortcut"
+						   Type="integer"
+						   Value="1"
+						   KeyPath="yes" />
 		</Component>
 	</Fragment>
 
 	<!-- Icon and properties -->
 	<Fragment>
-		<Icon Id="appicon.ico" SourceFile="$(var.App_TargetDir)appicon.ico" />
+		<Icon Id="appicon.ico" SourceFile="$(var.App_TargetDir)DAWPresence.exe" />
 		<Property Id="ARPPRODUCTICON" Value="appicon.ico" />
 	</Fragment>
 </Wix>
