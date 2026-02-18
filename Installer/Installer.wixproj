@@ -1,11 +1,12 @@
 ﻿<Project Sdk="WixToolset.Sdk/6.0.2">
 	<PropertyGroup>
-		<OutputName>DAWPresence-installer</OutputName>
-
 		<!-- Read version and then pass to preprocessor -->
 		<VersionFile>$(SolutionDir)App\VERSION.txt</VersionFile>
 		<AppVersion>$([System.IO.File]::ReadAllText($(VersionFile)).Trim())</AppVersion>
 		<DefineConstants>AppVersion=$(AppVersion)</DefineConstants>
+
+		<!-- it needs to read the version first -->
+		<OutputName>DAWPresence-$(AppVersion)-installer</OutputName>
 	</PropertyGroup>
 
 	<ItemGroup>
