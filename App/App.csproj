@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<AssemblyName>DAWPresence</AssemblyName>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net8.0-windows</TargetFramework>
+		<Nullable>enable</Nullable>
+		<UseWindowsForms>true</UseWindowsForms>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<RuntimeIdentifier>win-x64</RuntimeIdentifier>
+		<PlatformTarget>x64</PlatformTarget>
+		<PublishSingleFile>false</PublishSingleFile>
+		<ApplicationIcon>Assets\appicon.ico</ApplicationIcon>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="DiscordRichPresence" Version="1.6.1.70" />
+		<PackageReference Include="YamlDotNet" Version="16.3.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Update="version.txt">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+</Project>
