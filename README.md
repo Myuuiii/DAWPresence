@@ -17,9 +17,10 @@ A Discord Rich Presence app for several DAWs like FL Studio and Ableton.
 - Upon running the software, if it has detected a DAW that is currently supported, your Discord presence should be updated automatically.
 
 ### Installer process
-- Run "DAWPresence-installer.msi", and make sure you say Yes to any admin privileges the installer asks for
+- Run "DAWPresence-(VERSION)-installer.msi", and make sure you say Yes to any admin privileges the installer asks for
 - Once the installer finishes, you should have shortcuts to DAWPresence in both the Start Menu and Desktop
 - If you'd like to remove DAWPresence, you can do so at any time in Add/Remove Programs
+	- Installing will also unregister the startup entry for DAWPresence, so you don't need to worry about that
 - By default, it installs in `C:\Program Files\DAWPresence`
 - You can run the application manually from `DAWPresence\DAWPresence.exe`
 
@@ -35,10 +36,10 @@ A Discord Rich Presence app for several DAWs like FL Studio and Ableton.
 	Although completely optional (there's a portable version), it allows for easy installs/uninstalls of DAWPresence.
 
 * ### Low memory usage
-	Typically, the background application will only use about 10-20 MBs of RAM.
+	The application will only use about 10-15 megabytes of RAM at any given time. :D
 
 * ### Tray icon
-	The tray icon shows up in the bottom-right corner of Windows (the system tray), and right-clicking allows you to access options, like exiting, restarting, or opening the config. Left-clicking may also show status or bring up a menu (depending on your version)
+	The tray icon shows up in the bottom-right corner of Windows (the system tray), and right-clicking allows you to access options, like exiting, restarting, or opening the config. Left-clicking may also show your current status or bring up a menu (depending on your version)
 
 * ### Auto-start
 	Right-click the tray icon, and check the `Open on Startup` option. This will automatically register DAWPresence to launch with Windows.
@@ -53,8 +54,7 @@ A Discord Rich Presence app for several DAWs like FL Studio and Ableton.
 ## Building the installer
 WiX can be a bit finicky, but all you really have to do is:
 * Install [HeatWave](https://marketplace.visualstudio.com/items?itemName=FireGiant.FireGiantHeatWaveDev17). This provides support for WiX v4, although you can really use any tool that supports WiX v4 (other than the WiX toolset extension, as that only provides support for v3)
-* Build the `App` project
-* Build the `Installer` project
+* Build the `Installer` project, which should build `App` before-hand
 
 ## Adding a new DAW
 If you want to add a new DAW or want a maintainer to, you can do so by following the steps below:
@@ -88,7 +88,7 @@ An example is shown below:
 ![](https://ss.myuuiii.com/7634c47d-db45-4323-bc5c-7c6ab1993ea3.png)
 
 
-###### Example config.yml
+###### Example settings.yml
 
 ```yml
 # How often to update Discord Rich Presence (hh:mm:ss)
