@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
 	<PropertyGroup>
 		<AssemblyName>DAWPresence</AssemblyName>
 		<OutputType>WinExe</OutputType>
@@ -23,5 +22,4 @@
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 	</ItemGroup>
-
 </Project>
