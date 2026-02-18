@@ -10,28 +10,27 @@ public abstract class Daw
     public required string DisplayName { get; init; }
 
     /// <summary>
-    ///     Name of the DAWs process as seen in Task Manager on Windows
+    ///     Name of the DAW's process as seen in Task Manager on Windows
     /// </summary>
     public required string ProcessName { get; init; }
 
     /// <summary>
-    ///     The text that needs to be trimmed from the Window title in order to get the project name (if it works that way for
-    ///     the DAW)
+    ///     The text that needs to be trimmed from the window title in order to get the project name
     /// </summary>
     public required string WindowTrim { get; init; }
 
     /// <summary>
-    ///     The amount of characters that should be trimmed to get the project name
+    ///     The number of characters that should be trimmed to get the project name
     /// </summary>
     public int TitleOffset { get; protected init; }
 
     /// <summary>
-    ///     Discord Rich Presence Image Key
+    ///     Discord Rich Presence image key
     /// </summary>
     public required string ImageKey { get; init; }
 
     /// <summary>
-    ///     Discord Rich Presence Application Id
+    ///     Discord Rich Presence application ID
     /// </summary>
     public required string ApplicationId { get; init; }
 
@@ -41,25 +40,18 @@ public abstract class Daw
     public bool HideDetails { get; protected init; } = false;
 
     /// <summary>
-    ///     Return the amount of processes with the name of the DAW
+    ///     Returns whether there is a running instance of the DAW
     /// </summary>
-    public int ProcessCount => Process.GetProcessesByName(ProcessName).Length;
+    public bool IsRunning => Process.GetProcessesByName(ProcessName).Length > 0;
 
     /// <summary>
-    ///     Returns whether there is a running instance of the DAW or not
+    ///     Retrieves the name of the currently open project, or an empty string if no project is open
     /// </summary>
-    public bool IsRunning => ProcessCount > 0;
-
-    /// <summary>
-    ///     Retrieves the name of the currently open project or an empty string if no project is open
-    /// </summary>
-    /// <returns></returns>
     public abstract string GetProjectNameFromProcessWindow();
 
     /// <summary>
-    ///     Get the first process with the name of the DAW
+    ///     Gets the first running process matching the DAW's process name
     /// </summary>
-    /// <returns></returns>
     protected Process GetProcess()
     {
         return Process.GetProcessesByName(ProcessName).First();
