@@ -17,6 +17,8 @@ A Discord Rich Presence app for several DAWs like FL Studio and Ableton.
 - Upon running the software, if it has detected a DAW that is currently supported, your Discord presence should be updated automatically.
 
 ### Installer process
+> **Note:** The installer will not show a completion screen and will close immediately after installation. This is a known issue we are currently working on.
+
 - Run "DAWPresence-(VERSION)-installer.msi", and make sure you say Yes to any admin privileges the installer asks for
 - Once the installer finishes, you should have shortcuts to DAWPresence in both the Start Menu and Desktop
 - If you'd like to remove DAWPresence, you can do so at any time in Add/Remove Programs
@@ -122,7 +124,7 @@ SecretModeText: Working on a secret project
 Special thanks to everyone who has contributed to DAWPresence, including code, ideas, testing, and feedback!
 
 - **myuuiii** - Creator & main developer
-- **[Simoxus](https://github.com/Simoxus)** - Helped with tray icon, better config loading, installing on startup, and more.
+- **[Simoxus](https://github.com/Simoxus)** - Helped with tray icon, better config loading, creating the wix installer and so much more.
 - **[Intancote](https://github.com/Intancote)** - Added FL Studio Mobile
 - **[Ahontt](https://github.com/ahontt)** - Fixed Cubase 15 detection
 - **[Alixti](https://github.com/alixti)** - Added secret project to hide project details
