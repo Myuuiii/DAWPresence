@@ -63,11 +63,18 @@ If you want to add a new DAW or want a maintainer to, you can do so by following
 
 ### DIY:
 
-- Create a new branch in the format `{username}/{DAWname}-support` 
-- Create a new class in the `DAWPresenceBackgroundApp/DAWs` folder that inherits from `Daw`
+- Fork the repository on GitHub
+- Clone your fork locally
+- Create a new branch in the format `{username}/{DAWname}-support`
+- Create a new class in the `App/_DAWs` folder that inherits from `Daw`
 - Provide required values, such as the process name, window title, and the DAW name
-- Push the branch to the repository
-- Create a pull request to the main branch
+- To create a portable build for testing, run the following command from the `App` directory:
+	```
+	dotnet publish -c Release -p:PublishSingleFile=true -p:SelfContained=false -o ./publish
+	```
+	The output will be in `App/publish/`
+- Push the branch to your fork
+- Open a pull request from your fork's branch to the main repository's `master` branch
 - A maintainer will review the pull request and provide feedback
 - Once the pull request is approved, it will be merged into the main branch
 
