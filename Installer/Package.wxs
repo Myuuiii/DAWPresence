@@ -1,0 +1,116 @@
+﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+	<?define App_TargetDir=$(var.App.TargetDir)?>
+	<Package Name="DAWPresence"
+			 Language="1033"
+			 Version="$(var.AppVersion)"
+			 Manufacturer="Myuuiii"
+			 UpgradeCode="7bb018c7-5d26-4de2-a101-a1f64dd7e128">
+
+		<MediaTemplate EmbedCab="yes" />
+		<MajorUpgrade DowngradeErrorMessage="!(loc.DowngradeError)" />
+
+		<!-- Features -->
+		<Feature Id="Main">
+			<ComponentGroupRef Id="ProductComponents" />
+		</Feature>
+		<Feature Id="DesktopShortcutFeature" Title="Desktop Shortcut" AllowAbsent="yes">
+			<ComponentRef Id="DesktopShortcutComponent" />
+		</Feature>
+
+		<!-- Unregister from startup on uninstall (or at least try to) -->
+		<CustomAction Id="UnregisterStartup"
+					  FileRef="MainExe"
+					  ExeCommand="/uninstall"
+					  Execute="deferred"
+					  Impersonate="yes"
+					  Return="ignore" />
+		<InstallExecuteSequence>
+			<Custom Action="UnregisterStartup" Before="RemoveFiles" Condition='REMOVE="ALL"' />
+		</InstallExecuteSequence>
+	</Package>
+	<Fragment>
+		<StandardDirectory Id="ProgramFiles64Folder">
+			<Directory Id="INSTALLFOLDER" Name="DAWPresence" />
+		</StandardDirectory>
+		<StandardDirectory Id="ProgramMenuFolder">
+			<Directory Id="ApplicationProgramsFolder" Name="DAWPresence" />
+		</StandardDirectory>
+		<StandardDirectory Id="DesktopFolder" />
+	</Fragment>
+	<Fragment>
+		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+
+			<!-- Main -->
+			<Component>
+				<File Id="MainExe" Source="$(var.App_TargetDir)DAWPresence.exe" />
+				<!-- Start Menu shortcut -->
+				<Shortcut Id="StartMenuShortcut"
+						  Directory="ApplicationProgramsFolder"
+						  Name="DAWPresence"
+						  WorkingDirectory="INSTALLFOLDER"
+						  Icon="appicon.ico"
+						  IconIndex="0"
+						  Advertise="yes" />
+			</Component>
+			<Component>
+				<File Source="$(var.App_TargetDir)DAWPresence.dll" />
+			</Component>
+
+			<!-- Config files to include 'cause why not -->
+			<Component>
+				<File Source="$(var.App_TargetDir)version.txt" />
+			</Component>
+			<Component>
+				<File Source="$(var.App_TargetDir)DAWPresence.deps.json" />
+			</Component>
+			<Component>
+				<File Source="$(var.App_TargetDir)DAWPresence.runtimeconfig.json" />
+			</Component>
+
+			<!-- Dependencies -->
+			<Component>
+				<File Source="$(var.App_TargetDir)DiscordRPC.dll" />
+			</Component>
+			<Component>
+				<File Source="$(var.App_TargetDir)Newtonsoft.Json.dll" />
+			</Component>
+			<Component>
+				<File Source="$(var.App_TargetDir)YamlDotNet.dll" />
+			</Component>
+
+			<!-- Cleanup folders on uninstall -->
+			<Component Id="ApplicationProgramsFolderCleanup" Directory="ApplicationProgramsFolder">
+				<RemoveFolder Id="CleanupApplicationProgramsFolder" On="uninstall" />
+				<RegistryValue Root="HKCU" Key="Software\Myuuiii\DAWPresence" Name="installed" Type="integer" Value="1" KeyPath="yes" />
+			</Component>
+			<Component Id="InstallFolderCleanup" Directory="INSTALLFOLDER">
+				<RemoveFolder Id="CleanupInstallFolder" On="uninstall" />
+				<RegistryValue Root="HKCU" Key="Software\Myuuiii\DAWPresence" Name="installfolder" Type="integer" Value="1" KeyPath="yes" />
+			</Component>
+
+		</ComponentGroup>
+
+		<!-- Desktop shortcut -->
+		<Component Id="DesktopShortcutComponent" Directory="DesktopFolder">
+			<Shortcut Id="DesktopShortcut"
+						  Name="DAWPresence"
+						  Target="[INSTALLFOLDER]DAWPresence.exe"
+						  WorkingDirectory="INSTALLFOLDER"
+						  Icon="appicon.ico"
+						  IconIndex="0"
+						  Advertise="no" />
+			<RegistryValue Root="HKCU"
+						   Key="Software\Myuuiii\DAWPresence"
+						   Name="desktopshortcut"
+						   Type="integer"
+						   Value="1"
+						   KeyPath="yes" />
+		</Component>
+	</Fragment>
+
+	<!-- Icon and properties -->
+	<Fragment>
+		<Icon Id="appicon.ico" SourceFile="$(var.App_TargetDir)DAWPresence.exe" />
+		<Property Id="ARPPRODUCTICON" Value="appicon.ico" />
+	</Fragment>
+</Wix>
