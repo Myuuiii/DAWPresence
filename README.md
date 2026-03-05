@@ -47,14 +47,14 @@ A Discord Rich Presence app for several DAWs like FL Studio and Ableton.
 	Right-click the tray icon, and check the `Open on Startup` option. This will automatically register DAWPresence to launch with Windows.
 
 * ### Stopping the background application
-	Right-click the tray icon, and literally just select `Exit`. You can also run the executable again to close it.
+	Right-click the tray icon and select `Exit`. You can also run the executable again to close it.
 
 ---
 
 # Contributing
 
 ## Building the installer
-WiX can be a bit finicky, but all you really have to do is:
+WiX can be a bit finicky. To get started:
 * Install [HeatWave](https://marketplace.visualstudio.com/items?itemName=FireGiant.FireGiantHeatWaveDev17). This provides support for WiX v4, although you can really use any tool that supports WiX v4 (other than the WiX toolset extension, as that only provides support for v3)
 * Build the `Installer` project, which should build `App` before-hand
 
