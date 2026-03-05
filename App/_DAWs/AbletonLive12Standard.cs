@@ -1,8 +1,6 @@
-﻿using System.Text.RegularExpressions;
-
 namespace DAWPresence.DAWs;
 
-public partial class AbletonLive12Standard : Daw
+public class AbletonLive12Standard : Daw
 {
     public AbletonLive12Standard()
     {
@@ -20,10 +18,7 @@ public partial class AbletonLive12Standard : Daw
         if (process is null) return "";
         var title = process.MainWindowTitle;
         return title.Contains(WindowTrim)
-            ? TitleRegex().Match(title[..^TitleOffset]).Value
+            ? title[..^TitleOffset]
             : "";
     }
-
-    [GeneratedRegex("[^\\[]*")]
-    private static partial Regex TitleRegex();
 }
