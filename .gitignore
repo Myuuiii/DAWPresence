@@ -184,6 +184,9 @@ DocProject/Help/html
 # Click-Once directory
 publish/
 
+# Local portable build output
+App/publish/
+
 # Publish Web Output
 *.[Pp]ublish.xml
 *.azurePubxml
