@@ -6,8 +6,8 @@ public class Acid10 : Daw
     {
         ProcessName = "musicstudio100";
         DisplayName = "Acid Music Studio 10";
-        ImageKey = "fl";
-        ApplicationId = "1053779878916395048";
+        ImageKey = "acid10";
+        ApplicationId = "1479379779911286908";
         WindowTrim = " - " + DisplayName;
         TitleOffset = 15;
     }
