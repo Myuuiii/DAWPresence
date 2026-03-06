@@ -9,7 +9,7 @@ public class Acid10 : Daw
         ImageKey = "acid10";
         ApplicationId = "1479379779911286908";
         WindowTrim = " - " + DisplayName;
-        TitleOffset = 15;
+        TitleOffset = 23;
     }
 
     public override string GetProjectNameFromProcessWindow()
