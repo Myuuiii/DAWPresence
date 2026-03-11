@@ -18,6 +18,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\DAWPresence.Core\DAWPresence.Core.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<None Update="version.txt">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
