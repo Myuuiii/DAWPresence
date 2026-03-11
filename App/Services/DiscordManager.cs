@@ -47,8 +47,12 @@ public class DiscordManager
 
     protected static async Task ExecuteTaskAsync()
     {
-        var dawInstances = Assembly.GetExecutingAssembly().GetTypes()
-            .Where(t => t.IsSubclassOf(typeof(Daw)))
+        var dawTypes = Assembly.GetExecutingAssembly().GetTypes()
+            .Concat(typeof(Daw).Assembly.GetTypes())
+            .Where(t => t.IsSubclassOf(typeof(Daw)) && !t.IsAbstract)
+            .Distinct();
+
+        var dawInstances = dawTypes
             .Select(t => (Daw?)Activator.CreateInstance(t));
 
         var registeredDaws = dawInstances as Daw[] ?? dawInstances.ToArray();
