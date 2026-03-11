@@ -1,9 +1,4 @@
-![](https://cdn.myuuiii.com/projects/dawpresence/DAWRichPresence_v3.png)
-
-A Discord Rich Presence app for several DAWs like FL Studio and Ableton.
-
-| ![](https://ss.myuuiii.com/82ded0e9-b1e8-479b-86e0-cba978a63ddd.png) | ![](https://ss.myuuiii.com/7634c47d-db45-4323-bc5c-7c6ab1993ea3.png) |
-| :----------------------------------------: | :------------------------------------------------: |
+![](.github/header.png)
 
 ---
 
@@ -19,7 +14,7 @@ A Discord Rich Presence app for several DAWs like FL Studio and Ableton.
 ### Installer process
 > **Note:** The installer will not show a completion screen and will close immediately after installation. This is a known issue we are currently working on.
 
-- Run "DAWPresence-(VERSION)-installer.msi", and make sure you say Yes to any admin privileges the installer asks for
+- Run `DAWPresence-(VERSION)-installer.msi`, and make sure you say Yes to any admin privileges the installer asks for
 - Once the installer finishes, you should have shortcuts to DAWPresence in both the Start Menu and Desktop
 - If you'd like to remove DAWPresence, you can do so at any time in Add/Remove Programs
 	- Installing will also unregister the startup entry for DAWPresence, so you don't need to worry about that
@@ -49,6 +44,24 @@ A Discord Rich Presence app for several DAWs like FL Studio and Ableton.
 * ### Stopping the background application
 	Right-click the tray icon and select `Exit`. You can also run the executable again to close it.
 
+## Currently DAWPresence supports:
+
+- Ableton Live (9-12, Intro, Lite, Standard and Suite)
+- FL Studio (including mobile)
+- Acid 10
+- Bitwig Studio
+- Cakewalk Sonar
+- Cubase (13-15)
+- Fender Studio Pro 8
+- FMOD Studio
+- Nuendo 13
+- Reaper
+- Reason
+- Rekordbox
+- Renoise
+- SeratoDjPro
+- StudioOne
+ 
 ---
 
 # Contributing
@@ -94,7 +107,7 @@ Some people might want a custom image on the rich presence. To bump the project 
 
 An example is shown below:
 
-![](https://ss.myuuiii.com/7634c47d-db45-4323-bc5c-7c6ab1993ea3.png)
+![](.github/custom_key.png)
 
 
 ###### Example settings.yml
