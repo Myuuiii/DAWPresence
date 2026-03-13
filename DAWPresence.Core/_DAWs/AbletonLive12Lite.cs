@@ -1,9 +1,8 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using System.Text.RegularExpressions;
+using System.Diagnostics.CodeAnalysis;
 
 namespace DAWPresence.DAWs;
 
-public partial class AbletonLive12Lite : Daw
+public class AbletonLive12Lite : Daw
 {
     [SetsRequiredMembers]
     public AbletonLive12Lite()
@@ -19,7 +18,7 @@ public partial class AbletonLive12Lite : Daw
     public override string ParseProjectName(string title)
     {
         return title.Contains(WindowTrim)
-            ? TitleRegex().Match(title[..^TitleOffset]).Value
+            ? title[..^TitleOffset]
             : "";
     }
 
@@ -29,7 +28,4 @@ public partial class AbletonLive12Lite : Daw
         if (process is null) return "";
         return ParseProjectName(process.MainWindowTitle);
     }
-
-    [GeneratedRegex("[^\\[]*")]
-    private static partial Regex TitleRegex();
 }
