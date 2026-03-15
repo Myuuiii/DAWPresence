@@ -9,7 +9,7 @@ internal static class Constants
 {
     public const string APP_NAME = "DAWPresence";
     public const string APP_CREDITS = "DAWPresence by @myuuiii";
-    public const string APP_VERSION_PATH = @"App\version.txt";
+    public const string APP_VERSION_PATH = @"version.txt";
 
     public const string GITHUB_VERSION_URL = "https://raw.githubusercontent.com/Myuuiii/DAWPresence/master/App/version.txt";
     public const string GITHUB_PAGE_URL = "https://github.com/Myuuiii/DAWPresence";
