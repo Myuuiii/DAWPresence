@@ -27,12 +27,23 @@ public static class SettingsManager
         {
             try
             {
-                loadedSettings = deserializer.Deserialize<AppSettings>(File.ReadAllText(SettingsFilePath));
-                Console.WriteLine($"Settings loaded from: {SettingsFilePath}");
+                var settingsContent = File.ReadAllText(SettingsFilePath);
+                if (string.IsNullOrWhiteSpace(settingsContent))
+                {
+                    Console.WriteLine("Settings file is empty, recreating defaults.");
+                    BackupSettingsFileAsError();
+                }
+                else
+                {
+                    loadedSettings = deserializer.Deserialize<AppSettings>(settingsContent) ?? throw new InvalidDataException("Settings file parsed to null.");
+                    Console.WriteLine($"Settings loaded from: {SettingsFilePath}");
+                }
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error loading settings, using defaults: {ex.Message}");
+                Console.WriteLine($"Error loading settings, recreating defaults: {ex.Message}");
+                BackupSettingsFileAsError();
+                loadedSettings = new AppSettings();
             }
         }
 
@@ -51,6 +62,22 @@ public static class SettingsManager
 
         var serializer = new SerializerBuilder().Build();
         File.WriteAllText(SettingsFilePath, serializer.Serialize(Settings));
+    }
+
+    private static void BackupSettingsFileAsError()
+    {
+        if (!File.Exists(SettingsFilePath))
+        {
+            return;
+        }
+
+        var errorFilePath = $"{SettingsFilePath}.error";
+        if (File.Exists(errorFilePath))
+        {
+            errorFilePath = $"{SettingsFilePath}.{DateTime.UtcNow:yyyyMMddHHmmss}.error";
+        }
+
+        File.Move(SettingsFilePath, errorFilePath);
     }
 
     public static void SaveSettings()
