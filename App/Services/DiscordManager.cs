@@ -101,7 +101,7 @@ public class DiscordManager
                 Details = SettingsManager.Settings.SecretMode
                     ? SettingsManager.Settings.SecretModeText
                     : !runningDaw.HideDetails && !string.IsNullOrEmpty(projectName)
-                        ? SettingsManager.Settings.WorkingPrefixText + projectName
+                        ? SettingsManager.Settings.WorkingPrefixText + projectName + SettingsManager.Settings.WorkingSuffixText
                         : runningDaw.HideDetails
                             ? null
                             : SettingsManager.Settings.IdleText,
