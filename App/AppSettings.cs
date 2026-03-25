@@ -23,6 +23,11 @@ public class AppSettings
     public string WorkingPrefixText { get; set; } = "Working on ";
 
     /// <summary>
+    ///     Text to show after the project name when a project is open.
+    /// </summary>
+    public string WorkingSuffixText { get; set; } = string.Empty;
+
+    /// <summary>
     ///     Overwrite the image key (for custom images).
     /// </summary>
     public bool UseCustomImage { get; set; } = false;

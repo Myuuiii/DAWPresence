@@ -121,6 +121,8 @@ Offset: 00:00:00
 IdleText: Not working on a project
 # Prefix for the project name
 WorkingPrefixText: 'Working on '
+# Suffix for the project name
+WorkingSuffixText: ''
 # Enable custom image for Discord Rich Presence
 UseCustomImage: true
 # Your custom image key (contact myuuiii on Discord if eligible)
