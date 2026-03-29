@@ -1,5 +1,4 @@
 using DiscordRPC;
-using System.Reflection;
 
 namespace DAWPresence.Services;
 
@@ -47,12 +46,8 @@ public class DiscordManager
 
     protected static async Task ExecuteTaskAsync()
     {
-        var dawTypes = Assembly.GetExecutingAssembly().GetTypes()
-            .Concat(typeof(Daw).Assembly.GetTypes())
+        var dawInstances = typeof(Daw).Assembly.GetTypes()
             .Where(t => t.IsSubclassOf(typeof(Daw)) && !t.IsAbstract)
-            .Distinct();
-
-        var dawInstances = dawTypes
             .Select(t => (Daw?)Activator.CreateInstance(t));
 
         var registeredDaws = dawInstances as Daw[] ?? dawInstances.ToArray();
