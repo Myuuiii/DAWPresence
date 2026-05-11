@@ -99,10 +99,15 @@ public class DawWindowTitleTests
         new Acid10().ParseProjectName(title).ShouldBe(expected);
 
     [TestCase("MyProject - Bitwig Studio - ", "MyProject - ")]
+    [TestCase("AnotherProject - Bitwig Studio - ", "AnotherProject - ")]
+    [TestCase("Bitwig Studio - New 1", "New 1")]
+    [TestCase("Bitwig Studio - Untitled", "Untitled")]
+    [TestCase("Bitwig Studio - MyProject", "MyProject")]
     public void BitwigStudio_ParseProjectName(string title, string expected) =>
         new BitwigStudio().ParseProjectName(title).ShouldBe(expected);
 
-    [TestCase("Cakewalk Sonar -  - MyProject - Cakewalk Sonar - ", "Cakewalk Sonar -  - MyProject - ")]
+    [TestCase("Sonar - MyProject", "MyProject")]
+    [TestCase("Sonar - MyProject*", "MyProject*")]
     public void CakewalkSonar_ParseProjectName(string title, string expected) =>
         new CakewalkSonar().ParseProjectName(title).ShouldBe(expected);
 
