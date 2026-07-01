@@ -138,6 +138,16 @@ public class DawWindowTitleTests
     public void SteinbergNuendo_ParseProjectName(string title, string expected) =>
         new SteinbergNuendo().ParseProjectName(title).ShouldBe(expected);
 
+    [TestCase("Nuendo 14 - MyProject", "MyProject")]
+    [TestCase("Nuendo 14 - My Project With Spaces", "My Project With Spaces")]
+    public void SteinbergNuendo14_ParseProjectName(string title, string expected) =>
+        new SteinbergNuendo14().ParseProjectName(title).ShouldBe(expected);
+
+    [TestCase("Nuendo 15 - MyProject", "MyProject")]
+    [TestCase("Nuendo 15 - My Project With Spaces", "My Project With Spaces")]
+    public void SteinbergNuendo15_ParseProjectName(string title, string expected) =>
+        new SteinbergNuendo15().ParseProjectName(title).ShouldBe(expected);
+
     [TestCase("MyProject.rpp - REAPER v7.0/win64", "MyProject.rpp")]
     public void Reaper_ParseProjectName(string title, string expected) =>
         new Reaper().ParseProjectName(title).ShouldBe(expected);
