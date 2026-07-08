@@ -167,5 +167,6 @@ Special thanks to everyone who has contributed to DAWPresence, including code, i
 - **[Ahontt](https://github.com/ahontt)** - Fixed Cubase 15 detection
 - **[Alixti](https://github.com/alixti)** - Added secret project to hide project details
 - **[ferdmusic](https://github.com/ferdmusic)** - Added support for Nuendo 13
+- **[Beviluxe](https://github.com/Beviluxe)** - Fixed support for Bitwig Studio
 
 If you have contributed and would like to be mentioned here, feel free to open a pull request!!

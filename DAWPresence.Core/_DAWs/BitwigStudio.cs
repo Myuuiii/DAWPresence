@@ -10,7 +10,7 @@ public class BitwigStudio : Daw
         ProcessName = "BitwigStudioApp";
         DisplayName = "Bitwig Studio";
         ImageKey = "icon";
-        ApplicationId = "";
+        ApplicationId = "1524459853417025606";
         WindowTrim = DisplayName + " - ";
         TitleOffset = WindowTrim.Length;
     }
