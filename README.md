@@ -46,7 +46,7 @@
 
 ## Currently DAWPresence supports:
 
-- Ableton Live (9-12, Intro, Lite, Standard and Suite)
+- Ableton Live (9-12, Intro, Lite, Standard and Suite, plus the Live 12 Beta)
 - FL Studio (including mobile)
 - Acid 10
 - Bitwig Studio
@@ -168,5 +168,6 @@ Special thanks to everyone who has contributed to DAWPresence, including code, i
 - **[Alixti](https://github.com/alixti)** - Added secret project to hide project details
 - **[ferdmusic](https://github.com/ferdmusic)** - Added support for Nuendo 13
 - **[Beviluxe](https://github.com/Beviluxe)** - Fixed support for Bitwig Studio
+- **[boostem](https://github.com/boostem)** - Added support for Ableton 12 Beta 
 
 If you have contributed and would like to be mentioned here, feel free to open a pull request!!

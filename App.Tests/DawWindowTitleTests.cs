@@ -92,6 +92,11 @@ public class DawWindowTitleTests
     public void AbletonLive12Suite_ParseProjectName(string title, string expected) =>
         new AbletonLive12Suite().ParseProjectName(title).ShouldBe(expected);
 
+    [TestCase("MyProject - Ableton Live 12 Beta",    "MyProject")]
+    [TestCase("[MyProject] - Ableton Live 12 Beta",  "[MyProject]")]
+    public void AbletonLive12Beta_ParseProjectName(string title, string expected) =>
+        new AbletonLive12Beta().ParseProjectName(title).ShouldBe(expected);
+
     // Other DAWs
 
     [TestCase("MyProject.acd - ACID Music Studio 10.0", "MyProject")]
