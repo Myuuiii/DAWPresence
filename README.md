@@ -54,13 +54,14 @@
 - Cubase (13-15)
 - Fender Studio Pro 8
 - FMOD Studio
+- LMMS
 - Nuendo 13
 - Reaper
 - Reason
 - Rekordbox
 - Renoise
-- SeratoDjPro
-- StudioOne
+- Serato DJ Pro
+- Studio One
  
 ---
 
