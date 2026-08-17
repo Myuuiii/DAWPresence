@@ -172,3 +172,4 @@ Special thanks to everyone who has contributed to DAWPresence, including code, i
 - **[boostem](https://github.com/boostem)** - Added support for Ableton 12 Beta 
 
 If you have contributed and would like to be mentioned here, feel free to open a pull request!!
+ 
