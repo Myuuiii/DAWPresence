@@ -10,7 +10,7 @@ public class Lmms : Daw
         ProcessName = "lmms";
         DisplayName = "LMMS";
         ImageKey = "lmms";
-        ApplicationId = "1082950869856821308";
+        ApplicationId = "1538880475857162350";
         WindowTrim = " - LMMS";
         TitleOffset = 0;
     }
