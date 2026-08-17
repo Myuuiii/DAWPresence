@@ -126,7 +126,10 @@ public class DawWindowTitleTests
     public void BitwigStudioApp_ParseProjectName(string title, string expected) =>
         new BitwigStudioApp().ParseProjectName(title).ShouldBe(expected);
 
-    [TestCase("Cakewalk Sonar -  - MyProject - Cakewalk Sonar - ", "Cakewalk Sonar -  - MyProject - ")]
+    [TestCase("Cakewalk Sonar - [My Project.cwp]", "My Project")]
+    [TestCase("Cakewalk Sonar - [Untitled1]", "Untitled1")]
+    [TestCase("Cakewalk Sonar", "")]
+    [TestCase("", "")]
     public void CakewalkSonar_ParseProjectName(string title, string expected) =>
         new CakewalkSonar().ParseProjectName(title).ShouldBe(expected);
 
