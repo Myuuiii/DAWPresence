@@ -92,22 +92,44 @@ public class DawWindowTitleTests
     public void AbletonLive12Suite_ParseProjectName(string title, string expected) =>
         new AbletonLive12Suite().ParseProjectName(title).ShouldBe(expected);
 
+    [TestCase("MyProject - Ableton Live 12 Beta",    "MyProject")]
+    [TestCase("[MyProject] - Ableton Live 12 Beta",  "[MyProject]")]
+    public void AbletonLive12Beta_ParseProjectName(string title, string expected) =>
+        new AbletonLive12Beta().ParseProjectName(title).ShouldBe(expected);
+
     // Other DAWs
 
     [TestCase("MyProject.acd - ACID Music Studio 10.0", "MyProject")]
     public void Acid10_ParseProjectName(string title, string expected) =>
         new Acid10().ParseProjectName(title).ShouldBe(expected);
 
-    [TestCase("MyProject - Bitwig Studio - ", "MyProject - ")]
-    [TestCase("AnotherProject - Bitwig Studio - ", "AnotherProject - ")]
-    [TestCase("Bitwig Studio - New 1", "New 1")]
-    [TestCase("Bitwig Studio - Untitled", "Untitled")]
-    [TestCase("Bitwig Studio - MyProject", "MyProject")]
+    [TestCase("MyProject - Bitwig Studio - ", "MyProject")]
+    [TestCase("MyProject - Bitwig Studio", "MyProject")]
+    [TestCase("My Project With Spaces - Bitwig Studio", "My Project With Spaces")]
+    [TestCase("MyProject - Bitwig Studio 6.0", "MyProject")]
+    [TestCase("MyProject - Bitwig Studio 6.0.1", "MyProject")]
+    [TestCase("MyProject - Bitwig Studio 6.1", "MyProject")]
+    [TestCase("Track - One - Bitwig Studio", "Track - One")]
+    [TestCase("Bitwig Studio", "")]
+    [TestCase("", "")]
     public void BitwigStudio_ParseProjectName(string title, string expected) =>
         new BitwigStudio().ParseProjectName(title).ShouldBe(expected);
 
-    [TestCase("Sonar - MyProject", "MyProject")]
-    [TestCase("Sonar - MyProject*", "MyProject*")]
+    [TestCase("Bitwig Studio - New", "New")]
+    [TestCase("Bitwig Studio - MyProject", "MyProject")]
+    [TestCase("Bitwig Studio - My Project With Spaces", "My Project With Spaces")]
+    [TestCase("Bitwig Studio - Track - One", "Track - One")]
+    [TestCase("Bitwig Studio 6.0 - MyProject", "MyProject")]
+    [TestCase("Bitwig Studio 6.1.2 - MyProject", "MyProject")]
+    [TestCase("Bitwig Studio", "")]
+    [TestCase("", "")]
+    public void BitwigStudioApp_ParseProjectName(string title, string expected) =>
+        new BitwigStudioApp().ParseProjectName(title).ShouldBe(expected);
+
+    [TestCase("Cakewalk Sonar - [My Project.cwp]", "My Project")]
+    [TestCase("Cakewalk Sonar - [Untitled1]", "Untitled1")]
+    [TestCase("Cakewalk Sonar", "")]
+    [TestCase("", "")]
     public void CakewalkSonar_ParseProjectName(string title, string expected) =>
         new CakewalkSonar().ParseProjectName(title).ShouldBe(expected);
 
@@ -142,6 +164,16 @@ public class DawWindowTitleTests
     [TestCase("Nuendo 13 - MyProject", "MyProject")]
     public void SteinbergNuendo_ParseProjectName(string title, string expected) =>
         new SteinbergNuendo().ParseProjectName(title).ShouldBe(expected);
+
+    [TestCase("Nuendo 14 - MyProject", "MyProject")]
+    [TestCase("Nuendo 14 - My Project With Spaces", "My Project With Spaces")]
+    public void SteinbergNuendo14_ParseProjectName(string title, string expected) =>
+        new SteinbergNuendo14().ParseProjectName(title).ShouldBe(expected);
+
+    [TestCase("Nuendo 15 - MyProject", "MyProject")]
+    [TestCase("Nuendo 15 - My Project With Spaces", "My Project With Spaces")]
+    public void SteinbergNuendo15_ParseProjectName(string title, string expected) =>
+        new SteinbergNuendo15().ParseProjectName(title).ShouldBe(expected);
 
     [TestCase("MyProject.rpp - REAPER v7.0/win64", "MyProject.rpp")]
     public void Reaper_ParseProjectName(string title, string expected) =>

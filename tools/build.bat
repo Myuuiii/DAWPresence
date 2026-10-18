@@ -36,13 +36,14 @@ echo [build] Restoring solution...
 dotnet restore "%SOLUTION%"
 if errorlevel 1 ( popd & exit /b 1 )
 
-echo [build] Publishing App (%CONFIGURATION%, win-x64)...
-set "APP_PUBLISH_DIR=%REPO_ROOT%\App\bin\%CONFIGURATION%\net8.0-windows\win-x64\publish"
-dotnet publish "%APP_PROJECT%" -c %CONFIGURATION% -r win-x64 --self-contained false
+echo [build] Publishing App (%CONFIGURATION%, single-file)...
+set "APP_PUBLISH_DIR=%REPO_ROOT%\App\publish"
+if exist "%APP_PUBLISH_DIR%" rmdir /s /q "%APP_PUBLISH_DIR%"
+dotnet publish "%APP_PROJECT%" -c %CONFIGURATION% -r win-x64 -p:PublishSingleFile=true -p:SelfContained=false -p:Platform=x64 -o "%APP_PUBLISH_DIR%"
 if errorlevel 1 ( popd & exit /b 1 )
 
 echo [build] Building installer...
-dotnet build "%INSTALLER_PROJECT%" -c %CONFIGURATION%
+dotnet build "%INSTALLER_PROJECT%" -c %CONFIGURATION% -p:Platform=x64
 if errorlevel 1 ( popd & exit /b 1 )
 
 popd
