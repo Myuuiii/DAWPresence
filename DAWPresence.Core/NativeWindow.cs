@@ -21,6 +21,9 @@ internal static class NativeWindow
     private static extern int GetClassName(IntPtr hWnd, StringBuilder lpClassName, int nMaxCount);
 
     [DllImport("user32.dll")]
+    private static extern bool IsWindowVisible(IntPtr hWnd);
+
+    [DllImport("user32.dll")]
     private static extern uint GetWindowThreadProcessId(IntPtr hWnd, out uint lpdwProcessId);
 
     /// <summary>
@@ -49,5 +52,27 @@ internal static class NativeWindow
         }, IntPtr.Zero);
 
         return title;
+    }
+
+    /// <summary>
+    ///     Returns the non-empty titles of all visible top-level windows owned by the given process.
+    /// </summary>
+    public static List<string> GetWindowTitles(int processId)
+    {
+        var titles = new List<string>();
+        var titleBuffer = new StringBuilder(512);
+
+        EnumWindows((hWnd, _) =>
+        {
+            GetWindowThreadProcessId(hWnd, out var pid);
+            if (pid != (uint)processId || !IsWindowVisible(hWnd)) return true;
+
+            titleBuffer.Clear();
+            GetWindowText(hWnd, titleBuffer, titleBuffer.Capacity);
+            if (titleBuffer.Length > 0) titles.Add(titleBuffer.ToString());
+            return true;
+        }, IntPtr.Zero);
+
+        return titles;
     }
 }

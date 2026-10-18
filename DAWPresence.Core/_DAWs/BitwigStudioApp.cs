@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
 
@@ -31,10 +32,29 @@ public class BitwigStudioApp : Daw
         return match.Success ? match.Groups["project"].Value.Trim() : "";
     }
 
-    public override string GetProjectNameFromProcessWindow()
+    public override string GetProjectNameFromProcessWindow() =>
+        BitwigWindowScanner.FindProjectName(ProcessName, ParseProjectName);
+}
+
+/// <summary>
+///     Bitwig spawns several top-level windows (arranger, mixer, editors) and
+///     Process.MainWindowTitle may pick one without a project title. Scan every window
+///     of every matching process; the first title that parses to a project name wins.
+/// </summary>
+internal static class BitwigWindowScanner
+{
+    public static string FindProjectName(string processName, Func<string, string> parse)
     {
-        var process = GetProcess();
-        if (process is null) return "";
-        return ParseProjectName(process.MainWindowTitle);
+        foreach (var process in Process.GetProcessesByName(processName))
+        {
+            var titles = NativeWindow.GetWindowTitles(process.Id).Append(process.MainWindowTitle);
+            foreach (var title in titles)
+            {
+                var name = parse(title);
+                if (!string.IsNullOrEmpty(name)) return name;
+            }
+        }
+
+        return "";
     }
 }
