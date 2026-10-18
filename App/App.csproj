@@ -14,7 +14,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="DiscordRichPresence" Version="1.6.1.70" />
-		<PackageReference Include="YamlDotNet" Version="16.3.0" />
+		<PackageReference Include="YamlDotNet" Version="17.1.0" />
 	</ItemGroup>
 
 	<ItemGroup>
